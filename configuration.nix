@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, unstablePkgs, ... }: {
 
 imports =
   [ # Include the results of the hardware scan.
@@ -7,9 +6,11 @@ imports =
   ];
 
 
-#flakes
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
+#nix settings
+nix.settings = {
+experimental-features = [ "nix-command" "flakes" ];
+auto-optimise-store = true;
+};
 
 #boot, kernel
 boot = {
@@ -22,10 +23,15 @@ boot = {
     "exfat"
   ];
 
-  kernelPackages = pkgs.linuxPackages_hardened;
+  kernelPackages = unstablePkgs.linuxPackages_latest;
   kernelModules = [
     "nvidia"
-    "exfat"
+    "exfat" 
+    "vfio"
+  ];
+  kernelParams = [
+  "nohz_full=all"
+  "block.mq"
   ];
 
   #hardned kernel
@@ -44,6 +50,7 @@ boot = {
     "net.ipv4.conf.default.accept_redirects" = 0;   #same for new interfaces
     "net.ipv4.conf.all.send_redirects" = 0;   #dont send icmp redirects either, we're not a router
     "net.ipv4.conf.default.send_redirects" = 0;   #same but default
+    "vm.swappiness" = 10;
   };
 };
 
@@ -87,7 +94,7 @@ services.fail2ban = {
 #SSH
 services.openssh = {
   enable = false;
-  passwordAuthentication = true;
+  passwordAuthentication = false;
   useDns = true;
   permitRootLogin = "no";
 };
@@ -101,11 +108,14 @@ i18n.defaultLocale = "en_US.UTF-8";
 
 
 #sound
+hardware.pulseaudio.enable = false;
+security.rtkit.enable = true;
 services.pipewire = {
   enable = true;
   jack.enable = false;
-  alsa.enable = false;
-  pulse.enable = false; #enable for qemu/quickemu
+  alsa.enable = true;
+  alsa.support32Bit = false;
+  pulse.enable = true; #enable for qemu/quickemu
 };
 
 #bloat
@@ -126,6 +136,19 @@ hardware.graphics = {
   enable = true;
   enable32Bit = true;
 };
+
+#cpu optimization
+services.tlp = {
+  enable = true;
+  settings = {
+    CPU_SCALING_GOVERN_ON_AC = "performance";
+    CPU_SCALING_GOVERN_ON_BAT = "power";
+    CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+    CPU_ENERGY_PERF_POLICY_ON_BAT = "performance";
+    TLP_DEFAULT_MODE = "BAT";
+    TLP_PERSISTENT_DEFAULT = 1;
+    };
+  };
 
 hardware.nvidia = {
 #modsetting.enable = true; #dont work refuses to build
@@ -156,9 +179,10 @@ users.users.null = {
 
 
 #packages
-nixpkgs.config.allowUnfree = true;
+#nixpkgs.config.allowUnfree = true;
 environment.systemPackages = with pkgs; [
   #term
+  bat
   alacritty
   neovim
   git
@@ -171,6 +195,7 @@ environment.systemPackages = with pkgs; [
   #etc
   tldr
   #DE
+  playerctl
   wl-clipboard
   grim
   slurp
@@ -178,7 +203,11 @@ environment.systemPackages = with pkgs; [
   fastfetch
   #langs/lsps
   nil
-];
+] ++ (with unstablePkgs; [
+  #unstable pkgs here
+]);
+
+
 
 #zsh
 programs.zsh = {
@@ -187,19 +216,28 @@ programs.zsh = {
   autosuggestions.enable = true;
   syntaxHighlighting.enable = true;
   promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+  shellAliases = {
+    ".." = "cd ..";
+    vim = "nvim";
+    vimf = "nvimf";
+    fetch = "fastfetch";
+  };
   shellInit = ''
-  cdf() {
-    cd "$(fd --type d --hidden --exclude .git | fzf)"
-  }
 
-  nvimf() {
-    nvim "$(fd --type f --hidden --exclude .git | fzf)"
-  }
+    cdf() {
+      selected=$(fd --hidden --exclude .git | fzf --preview "ls -l {}" --border)
+      if [ -d "$selected" ]; then
+        cd "$selected" || echo "Directory $selected not found"
+      elif [ -f "$selected" ]; then
+        nvim "$selected" || echo "File $selected not found"
+      else
+        echo "$selected is neither a file nor a directory"
+      fi
+    }
+  nvimf() { nvim "$(fd --hidden --exclude .git | fzf)" }
+  fehf()  { feh "$(fd --type f --exclude .git | fzf )" }
 
-  fehf() {
-    feh "$(fd --type f --exclude .git | fzf )"
-  }
-
+  export FZF_DEFAULT_OPTS="--height 100% --border --preview 'bat --style=numbers --color=always --line-range=:500 {}' --preview-window=right:60%"
   export fzf_default_command='fd --type f --hidden --exclude .git'
   export fzf_ctrl_t_command="$fzf_default_command"
   '';
@@ -211,7 +249,6 @@ fonts.packages = with pkgs; [
 ];
 
 programs.sway.enable = true;
-
 
 #obs
 programs.obs-studio = {
