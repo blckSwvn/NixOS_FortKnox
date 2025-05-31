@@ -1,0 +1,8 @@
+prompt="Run: "
+insensitive=true
+allow-images=true
+width=30%
+height=20%
+lines=10
+location=0 # Centered
+

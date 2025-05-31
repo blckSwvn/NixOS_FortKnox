@@ -4,7 +4,6 @@
 environment.systemPackages = with pkgs; [
   #term
   bat
-  alacritty
   neovim
   git
   btop
@@ -17,7 +16,6 @@ environment.systemPackages = with pkgs; [
   #etc
   tldr
   #DE
-  i3
   wofi
   playerctl
   wl-clipboard
@@ -37,9 +35,6 @@ fonts.packages = with pkgs; [
   nerd-fonts.meslo-lg
   jetbrains-mono
 ];
-
-
-programs.sway.enable = true;
 
 programs.obs-studio = {
 enable = false; #disabled, runs heavy background processes
