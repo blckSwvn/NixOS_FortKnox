@@ -11,7 +11,10 @@ programs.zsh = {
     ".." = "cd ..";
     vim = "nvim";
     vimf = "nvimf";
+    rebuild = "sudo nixos-rebuild switch --flake /home/null/NixOS#null";
     fetch = "fastfetch";
+    gc = "git commit";
+    gp = "git push origin main";
   };
   shellInit = ''
 
