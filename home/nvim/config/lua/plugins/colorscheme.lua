@@ -6,10 +6,10 @@ return {
 {"rebelot/kanagawa.nvim", priority = 1000},
 {"olimorris/onedarkpro.nvim", priority = 1000,
 config = function()
-vim.cmd.colorscheme "oxocarbon"
+--vim.cmd.colorscheme "oxocarbon"
 --vim.cmd.colorscheme "gruvbox"
 --vim.cmd.colorscheme "carbonfox"
---vim.cmd.colorscheme "nordic"
+vim.cmd.colorscheme "nordic"
 --vim.cmd.colorscheme "kanagawa-dragon"
 --vim.cmd.colorscheme "onedark_dark"
 end

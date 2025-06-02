@@ -22,8 +22,8 @@ output HDMI-A-1 pos 1920 0
 #output * bg /home/null/Pictures/Wallpaper/WALL-E.jpg fill
 
 # Launch applications
-bindsym $mod+Return exec $term
-bindsym $mod+Backspace kill
+bindsym $mod+space exec $term
+bindsym $mod+q kill
 bindsym $mod+m exec $menu
 bindsym $mod+c exec $term --working-directory ~/.config
 bindsym $mod+n exec $term --working-directory ~/NixOS 
@@ -52,28 +52,28 @@ workspace 4|IronMan output HDMI-A-1
 workspace 5|Mr.robot output HDMI-A-1
 
 # Workspace switching
-bindsym $mod+1 workspace number 1|BreakingBad 
-bindsym $mod+2 workspace number 2|WALL-E
-bindsym $mod+3 workspace number 3|Borat
-bindsym $mod+4 workspace number 4|IronMan
-bindsym $mod+5 workspace number 5|Mr.robot
-bindsym $mod+6 workspace number 6|Dexter
-bindsym $mod+7 workspace number 7|BetterCallSaul
-bindsym $mod+8 workspace number 8|FightClub
-bindsym $mod+9 workspace number 9|TheTruManShow
-bindsym $mod+0 workspace number 10|Superbad
+bindsym space+1 workspace number 1|BreakingBad 
+bindsym space+2 workspace number 2|WALL-E
+bindsym space+3 workspace number 3|Borat
+bindsym space+4 workspace number 4|IronMan
+bindsym space+5 workspace number 5|Mr.robot
+bindsym space+6 workspace number 6|Dexter
+bindsym space+7 workspace number 7|BetterCallSaul
+bindsym space+8 workspace number 8|FightClub
+bindsym space+9 workspace number 9|TheTruManShow
+bindsym space+0 workspace number 10|Superbad
 
 # Move container to workspace
-bindsym ctrl+1 move container to workspace number 1|BreakingBad
-bindsym ctrl+2 move container to workspace number 2|WALL-E
-bindsym ctrl+3 move container to workspace number 3|Borat
-bindsym ctrl+4 move container to workspace number 4|IronMan
-bindsym ctrl+5 move container to workspace number 5|Mr.Robot
-bindsym ctrl+6 move container to workspace number 6|Dexter
-bindsym ctrl+7 move container to workspace number 7|BetterCallSau
-bindsym ctrl+8 move container to workspace number 8|FightClub
-bindsym ctrl+9 move container to workspace number 9|TheTruManShow
-bindsym ctrl+0 move container to workspace number 10|Superbad 
+bindsym space+shift+1 move container to workspace number 1|BreakingBad
+bindsym space+shift+2 move container to workspace number 2|WALL-E
+bindsym space+shift+3 move container to workspace number 3|Borat
+bindsym space+shift+4 move container to workspace number 4|IronMan
+bindsym space+shift+5 move container to workspace number 5|Mr.Robot
+bindsym space+shift+6 move container to workspace number 6|Dexter
+bindsym space+shift+7 move container to workspace number 7|BetterCallSaul
+bindsym space+shift+8 move container to workspace number 8|FightClub
+bindsym space+shift+9 move container to workspace number 9|TheTruManShow
+bindsym space+shift+0 move container to workspace number 10|Superbad 
 
 # Screenshot with slurp
 bindsym $mod+g exec grim -g "$(slurp)" 
@@ -83,39 +83,30 @@ bindsym $mod+shift+$left move left
 bindsym $mod+shift+$down move down
 bindsym $mod+shift+$up move up
 bindsym $mod+shift+$right move right
-bindsym $mod+w splith
-bindsym $mod+e splitv
+bindsym $mod+return splith
+bindsym $mod+backspace splitv
 
 #wpctl, playerctl
-bindsym $mod+space exec playerctl play-pause
+bindsym $mod+p exec playerctl play-pause
 bindsym $mod+Right exec playerctl next
 bindsym $mod+left exec playerctl previous
 bindsym $mod+up exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
 bindsym $mod+down exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-
-bindsym $mod+shift+m exec wpctl set-mute @DEFAUTL_SINK@ toggle
+bindsym $mod+shift+m exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
-# Resize mode
-mode "resize" {
-    bindsym $left resize grow width 200px
-    bindsym $down resize shrink height 200px
-    bindsym $up resize grow height 200px
-    bindsym $right resize shrink width 200px
-    bindsym Escape mode "default"
-}
-bindsym $mod+r mode "resize"
-bindsym space+r mode "resize"
+bindsym super+$left resize grow width 200px
+bindsym super+$down resize shrink height 200px
+bindsym super+$up resize grow height 200px
+bindsym super+$right resize shrink width 200px
 
-mode "system" {
-    bindsym $down exec brightnessctl set 20%-
-    bindsym $up exec brightnessctl set 20%+
-    bindsym Escape mode "default"
-}
-bindsym $mod+s mode "system"
+bindsym $mod+shift+down exec brightnessctl set 20%-
+bindsym $mod+shift+up exec brightnessctl set 20%+
 
 # Set colors for focused window border, inactive window border, and background
 client.focused            #222222 #ffffff #ffffff
 client.unfocused          #222222 #222222 #222222
 client.focused_inactive   #222222 #222222 #222222
 client.urgent             #222222 #222222 #222222
+
 ### Appearance
 default_border pixel 2
