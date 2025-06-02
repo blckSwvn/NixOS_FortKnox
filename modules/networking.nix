@@ -11,7 +11,7 @@ networking = {
     80    #HTTP
     443   #HTTPS
     51820 #WireGuard
-    #22    #SSH
+    22    #SSH
     #53    #DNS
     ];
   };
