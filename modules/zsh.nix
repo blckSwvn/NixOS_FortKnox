@@ -6,7 +6,19 @@ programs.zsh = {
   enableCompletion = true;
   autosuggestions.enable = true;
   syntaxHighlighting.enable = true;
-  promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+  promptInit = ''
+    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+    if [[ -z "$ZSH_LOGGED_IN" && $- == *l* ]]; then
+      export ZSH_LOGGED_IN=true
+      echo "
+        ┌────────────────────────────────────────────┐
+        │ Welcome aboard captain, all systems online │
+	└────────────────────────────────────────────┘
+        "
+    fi
+  '';
   shellAliases = {
     ".." = "cd ..";
     vim = "nvim";

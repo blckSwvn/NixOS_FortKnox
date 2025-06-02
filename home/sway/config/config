@@ -97,13 +97,14 @@ bindsym $mod+shift+m exec wpctl set-mute @DEFAUTL_SINK@ toggle
 # Resize mode
 mode "resize" {
     bindsym $left resize grow width 200px
-    bindsym $down resize grow height 200px
-    bindsym $up resize shrink height 200px
+    bindsym $down resize shrink height 200px
+    bindsym $up resize grow height 200px
     bindsym $right resize shrink width 200px
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-# Volume control mode
+bindsym space+r mode "resize"
+
 mode "system" {
     bindsym $down exec brightnessctl set 20%-
     bindsym $up exec brightnessctl set 20%+
@@ -111,5 +112,10 @@ mode "system" {
 }
 bindsym $mod+s mode "system"
 
+# Set colors for focused window border, inactive window border, and background
+client.focused            #222222 #ffffff #ffffff
+client.unfocused          #222222 #222222 #222222
+client.focused_inactive   #222222 #222222 #222222
+client.urgent             #222222 #222222 #222222
 ### Appearance
 default_border pixel 2

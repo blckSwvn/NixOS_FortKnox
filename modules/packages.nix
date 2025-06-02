@@ -3,7 +3,10 @@
 #packages
 environment.systemPackages = with pkgs; [
   #term
+  wineWowPackages.full
+  networkmanagerapplet
   bat
+  brightnessctl
   neovim
   git
   btop
@@ -26,6 +29,7 @@ environment.systemPackages = with pkgs; [
   #langs/lsps
   nil
   clang-tools
+  gcc
 ] ++ (with unstablePkgs; [
   #unstable pkgs here
 ]);
