@@ -3,14 +3,16 @@ boot = {
   #bootloader
   loader = {
     systemd-boot.enable = false;
-    grub.enable = true;
-    grub.version = 2;
-    grub.efiSupport = true;
-    grub.device = "nodev";
-    grub.useOSProber = true;
+    grub = {
+      enable = true;
+      version = 2;
+      efiSupport = true;
+      device = "nodev";
+      useOSProber = true;
+      gfxmodeEfi = "1920x1080";
+      theme = ./grub-themes/CRT-Amber-GRUB-Theme/theme.txt;
+    };
     efi.canTouchEfiVariables = true;
-    gfxmodeEfi = "1920x1080";
-    theme = ./grub-themes/CRT-Amber-GRUB-Theme/theme.txt;
   };
 
   supportedFilesystems = [
