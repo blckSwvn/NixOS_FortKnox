@@ -1,8 +1,17 @@
 { config, pkgs, unstablePkgs, ... } : {
 boot = {
   #bootloader
-  loader.systemd-boot.enable = true;
-  loader.efi.canTouchEfiVariables = true;
+  loader = {
+    systemd-boot.enable = false;
+    grub.enable = true;
+    grub.version = 2;
+    grub.efiSupport = true;
+    grub.device = "nodev";
+    grub.useOSProber = true;
+    efi.canTouchEfiVariables = true;
+    gfxmodeEfi = "1920x1080";
+    theme = ./grub-themes/CRT-Amber-GRUB-Theme/theme.txt;
+  };
 
   supportedFilesystems = [
     "ntfs"

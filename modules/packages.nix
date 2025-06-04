@@ -3,6 +3,7 @@
 #packages
 environment.systemPackages = with pkgs; [
   #term
+  unrar
   wineWowPackages.full
   networkmanagerapplet
   bat
@@ -15,6 +16,7 @@ environment.systemPackages = with pkgs; [
   parted
   gnumake
   #progs
+  blueberry
   librewolf
   #etc
   tldr
