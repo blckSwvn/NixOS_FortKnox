@@ -8,8 +8,6 @@ boot = {
       efiSupport = true;
       device = "nodev";
       useOSProber = true;
-      gfxmodeEfi = "1920x1080";
-      theme = ./grub-themes/CRT-Amber-GRUB-Theme/theme.txt;
     };
     efi.canTouchEfiVariables = true;
   };

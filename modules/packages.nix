@@ -3,6 +3,7 @@
 #packages
 environment.systemPackages = with pkgs; [
   #term
+  bash
   unrar
   wineWowPackages.full
   networkmanagerapplet

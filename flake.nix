@@ -6,7 +6,7 @@
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-  };
+    };
 
   outputs = { self, nixpkgs, unstable, home-manager, ... }: {
     nixosConfigurations.null = nixpkgs.lib.nixosSystem {
