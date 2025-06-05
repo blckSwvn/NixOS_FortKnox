@@ -40,6 +40,7 @@ programs.zsh = {
         echo "$selected is neither a file nor a directory"
       fi
     }
+
   nvimf() { nvim "$(fd --hidden --exclude .git | fzf)" }
   fehf()  { feh "$(fd --type f --exclude .git | fzf )" }
 
