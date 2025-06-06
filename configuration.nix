@@ -38,10 +38,12 @@ users.users.null = {
   packages = with pkgs; [];
 };
 
+services.logind.lidSwitch = "ignore";
+
 
 environment.variables = {
 MANPAGER = "nvim +Man!";
-EDITOR = "nvim";
+#EDITOR = "nvim";
 };
 
 # This value determines the NixOS release from which the default

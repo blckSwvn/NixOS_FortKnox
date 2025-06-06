@@ -99,8 +99,8 @@ bindsym super+$down resize shrink height 200px
 bindsym super+$up resize grow height 200px
 bindsym super+$right resize shrink width 200px
 
-bindsym $mod+shift+down exec brightnessctl set 20%-
-bindsym $mod+shift+up exec brightnessctl set 20%+
+bindsym $mod+shift+down exec brightnessctl set 10%-
+bindsym $mod+shift+up exec brightnessctl set 10%+
 
 # Set colors for focused window border, inactive window border, and background
 client.focused            #222222 #ffffff #ffffff

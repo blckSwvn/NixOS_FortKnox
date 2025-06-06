@@ -33,6 +33,8 @@ environment.systemPackages = with pkgs; [
   nil
   clang-tools
   gcc
+  hyprland
+  waybar
 ] ++ (with unstablePkgs; [
   #unstable pkgs here
 ]);
