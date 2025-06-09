@@ -7,5 +7,6 @@ home.file.".config/sway" = {
 
 home.packages = with pkgs; [
   sway
+  autotiling
   ];
 }

@@ -21,7 +21,9 @@ environment.systemPackages = with pkgs; [
   librewolf
   #etc
   tldr
+  jq
   #DE
+  kando
   wofi
   playerctl
   wl-clipboard

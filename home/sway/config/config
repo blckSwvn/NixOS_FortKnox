@@ -8,6 +8,7 @@ set $menu wofi --show drun
 set $browser librewolf
 
 exec env LANG=en_US.UTF-8 
+exec autotiling
 
 ### keyboard layout
 input "type:keyboard" {
@@ -109,4 +110,4 @@ client.focused_inactive   #222222 #222222 #222222
 client.urgent             #222222 #222222 #222222
 
 ### Appearance
-default_border pixel 2
+default_border pixel 3
