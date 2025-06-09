@@ -23,7 +23,6 @@ environment.systemPackages = with pkgs; [
   tldr
   jq
   #DE
-  kando
   wofi
   playerctl
   wl-clipboard
@@ -35,8 +34,6 @@ environment.systemPackages = with pkgs; [
   nil
   clang-tools
   gcc
-  hyprland
-  waybar
 ] ++ (with unstablePkgs; [
   #unstable pkgs here
 ]);

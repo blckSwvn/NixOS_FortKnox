@@ -13,6 +13,7 @@ exec autotiling
 ### keyboard layout
 input "type:keyboard" {
 xkb_layout no
+xkb_options "caps:escape"
 }
 
 mouse_warping none
@@ -27,7 +28,7 @@ bindsym $mod+space exec $term
 bindsym $mod+q kill
 bindsym $mod+m exec $menu
 bindsym $mod+c exec $term --working-directory ~/.config
-bindsym $mod+n exec $term --working-directory ~/NixOS 
+bindsym $mod+n exec $term --working-directory ~/NixOS_FortKnox
 bindsym $mod+b exec $browser 
 
 floating_modifier $mod normal
