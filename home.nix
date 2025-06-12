@@ -5,6 +5,7 @@ imports = [
   ./home/nvim/nvim.nix
   ./home/alacritty/alacritty.nix
   ./home/wofi/wofi.nix
+  ./home/waybar/waybar.nix
 ];
 
 home.username = "null";
