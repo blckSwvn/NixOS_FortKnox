@@ -1,0 +1,93 @@
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: #DADADA; /* primary.foreground */
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 0 5px;
+  border-radius: 9999px;
+  margin: 0 4px;
+  background-color: #13131b;
+  box-shadow: 0 0 0px rgba(146, 190, 244, 0.35); /* cyan glow */
+}
+
+#workspaces button {
+  all: unset;
+  padding: 0 8px;
+  color: #E0E0E0; /* normal.white */
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  text-shadow: 0 0 3px rgba(146, 190, 244, 0.7); /* cyan accent */
+}
+
+#workspaces button.active {
+  color: #92bef4; /* cyan accent */
+  text-shadow: 0 0 0px #92bef4;
+}
+
+#workspaces button.empty {
+  color: rgba(224, 224, 224, 0.08); /* faded white */
+}
+
+#workspaces button.empty:hover {
+  color: rgba(224, 224, 224, 0.12);
+  text-shadow: 0 0 2px rgba(146, 190, 244, 0.3); /* cyan glow */
+}
+
+/* General module styling */
+#clock,
+#network,
+#battery,
+#custom-date {
+  padding: 0 10px;
+  margin: 0 4px;
+  background-color: rgba(19, 19, 27, 1); /* primary.background */
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(64, 64, 64, 0.5);
+  color: #DADADA;
+  transition: background 0.3s ease;
+}
+
+#clock:hover,
+#network:hover,
+#battery:hover,
+#power-profiles-daemon:hover,
+#custom-distro:hover,
+#custom-date:hover {
+  background-color: rgba(92, 92, 92, 0.2); /* bright.black overlay */
+}
+
+/* ⚙️ Capsule styling for center trio */
+#custom-date {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  margin: 0 4px;
+  padding-right: 12px;
+}
+
+/* Battery state styling */
+#battery.warning {
+  color: #F5BC00; /* yellow */
+}
+
+#battery.critical {
+  color: #E00022; /* red */
+  background-color: rgba(224, 0, 34, 0.15);
+}
+
+#battery.charging {
+  color: #61D1C0; /* bright.green */
+}
+

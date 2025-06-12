@@ -21,7 +21,6 @@ environment.systemPackages = with pkgs; [
   librewolf
   #etc
   tldr
-  jq
   #DE
   wofi
   playerctl
