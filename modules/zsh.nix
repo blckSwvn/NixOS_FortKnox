@@ -7,8 +7,7 @@ programs.zsh = {
   autosuggestions.enable = true;
   syntaxHighlighting.enable = true;
   promptInit = ''
-    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    eval "$(${pkgs.starship}/bin/starship init zsh)"
 
     if [[ -z "$ZSH_LOGGED_IN" && $- == *l* ]]; then
       export ZSH_LOGGED_IN=true
@@ -27,6 +26,7 @@ programs.zsh = {
     fetch = "fastfetch";
     gc = "git commit";
     gp = "git push origin main";
+    gs = "git status";
   };
   shellInit = ''
 

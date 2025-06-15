@@ -7,8 +7,9 @@ set $term alacritty
 set $menu wofi --show drun 
 set $browser librewolf
 
-exec env LANG=en_US.UTF-8 
-exec autotiling
+exec_always env LANG=en_US.UTF-8 
+exec_always waybar
+exec_always autotiling
 
 ### keyboard layout
 input "type:keyboard" {

@@ -14,7 +14,6 @@
   ],
   "modules-right": [
     "network",
-    "power-profiles-daemon",
     "battery"
   ],
 
@@ -24,15 +23,11 @@
     "format-icons": {
       "active": "",
       "default": "",
-      "empty": ""
+      "empty": ""
     },
-      "persistent-workspaces": [
-    1,
-    2,
-    3,
-    4,
-    5
-  ]
+    "persistent-workspaces": {
+       "*": [ 1,2,3,4,5 ]
+    }
   },
 
   "custom/date": {

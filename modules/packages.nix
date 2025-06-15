@@ -3,6 +3,7 @@
 #packages
 environment.systemPackages = with pkgs; [
   #term
+  starship
   bash
   unrar
   wineWowPackages.full
@@ -17,6 +18,7 @@ environment.systemPackages = with pkgs; [
   parted
   gnumake
   #progs
+  modrinth-app
   blueberry
   librewolf
   #etc
@@ -29,6 +31,7 @@ environment.systemPackages = with pkgs; [
   slurp
   #bloat
   fastfetch
+  nitch
   #langs/lsps
   nil
   clang-tools

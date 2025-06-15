@@ -42,15 +42,18 @@ services.tlp = {
     };
   };
 
+services.xserver.videoDrivers = [ "nvidia" ];
+
+hardware.nvidia.modesetting.enable = true;
+hardware.nvidia.powerManagement.enable = true;
+
 hardware.nvidia = {
-#modsetting.enable = true; #dont work refuses to build
-#powerManagment.enable = true;
-package = config.boot.kernelPackages.nvidiaPackages.production;
+package = config.boot.kernelPackages.nvidiaPackages.stable;
 nvidiaSettings = true;
 open = false;
 prime = {
   sync.enable = true;
-  amdgpuBusId = "PCI:230:0:0";
+  intelBusId = "PCI:230:0:0";
   nvidiaBusId = "PCI:1:0:0";
   };
 };

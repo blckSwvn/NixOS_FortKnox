@@ -11,6 +11,8 @@ boot = {
     };
     efi.canTouchEfiVariables = true;
   };
+  initrd.kernelModules = [ "nvidia" ];
+  blacklistedKernelModules = [ "nouveau" ];
 
   supportedFilesystems = [
     "ntfs"
