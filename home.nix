@@ -6,6 +6,7 @@ imports = [
   ./home/alacritty/alacritty.nix
   ./home/wofi/wofi.nix
   ./home/waybar/waybar.nix
+  ./home/starship/starship.nix
 ];
 
 home.username = "null";

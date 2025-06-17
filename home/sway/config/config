@@ -16,6 +16,8 @@ input "type:keyboard" {
 xkb_layout no
 xkb_options "caps:escape"
 }
+input "pointer" {
+}
 
 mouse_warping none
 output eDP-1 pos 0 0

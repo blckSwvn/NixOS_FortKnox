@@ -1,6 +1,6 @@
 { config, pkgs, ... } : {
 
-home.file.".config/starship" = {
+home.file.".config/" = {
   source = ./config;
   recursive = true;
   };

@@ -11,11 +11,11 @@ programs.zsh = {
 
     if [[ -z "$ZSH_LOGGED_IN" && $- == *l* ]]; then
       export ZSH_LOGGED_IN=true
-      echo "
+      echo -e "\033[1;34m
         ┌────────────────────────────────────────────┐
         │ Welcome aboard captain, all systems online │
 	└────────────────────────────────────────────┘
-        "
+        \033[0m"
     fi
   '';
   shellAliases = {

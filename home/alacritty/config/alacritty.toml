@@ -9,18 +9,18 @@ foreground = "#DADADA"  # Soft white
 
 [colors.normal]
 black   = "#404040"  #backgrounds low contrast text
-red     = "#E00022"  #errors dont change 
+red     = "#DB1200"  #errors dont change 
 green   = "#3FC8B3"  #commands sucess msgs
 yellow  = "#F5BC00"  #warnings dont change 
 blue    = "#4472Ca"  #dir names 
-magenta = "#3F168B"  #msc 
+magenta = "#16AC5A"  #msc 
 cyan    = "#92bef4"  #network, accents 
 white   = "#E0E0E0"  #defualt text dont change
 
 [colors.bright]
 black   = "#5C5C5C"  #backgrounds low contrast text
 red     = "#FF0A2F"  #errors dont change 
-green   = "#61D1C0"  #commands sucess msgs
+green   = "#26E37B"  #commands sucess msgs
 yellow  = "#FFCB1F"  #warnings dont change 
 blue    = "#7094D7"  #dir names 
 magenta = "#581EC2"  #msc 

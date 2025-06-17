@@ -1,0 +1,46 @@
+# General Settings
+format = """
+[$username]($style)[$hostname]($style)[$directory]($style) [$git_branch]($style) [$git_status]($style) [$cmd_duration]($style)
+$character
+"""
+
+add_newline = true
+
+# Prompt Symbols
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+vicmd_symbol = "[V](bold yellow)"
+
+# Show username/hostname only for remote sessions
+[username]
+style_user = "blue"
+show_always = false 
+
+[hostname]
+style = "bold magenta"
+ssh_only = true
+
+[directory]
+format = "[$path]($style)"
+truncation_length = 3
+truncate_to_repo = false
+style = "cyan"
+
+[git_branch]
+format = "[$branch]($style)"
+symbol = " "
+style = "bold purple"
+only_attached = true
+
+[git_status]
+format = "[$all_status]($style)($style)"
+disabled = false
+
+[cmd_duration]
+min_time = 10000  # ms
+style = "bold italic yellow"
+
+# Memory optimization
+[git_metrics]
+disabled = true

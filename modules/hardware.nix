@@ -48,7 +48,7 @@ hardware.nvidia.modesetting.enable = true;
 hardware.nvidia.powerManagement.enable = true;
 
 hardware.nvidia = {
-package = config.boot.kernelPackages.nvidiaPackages.stable;
+package = config.boot.kernelPackages.nvidiaPackages.beta; #prod aka latest aka stable usally
 nvidiaSettings = true;
 open = false;
 prime = {
