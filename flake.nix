@@ -9,7 +9,7 @@
     };
 
   outputs = { self, nixpkgs, unstable, home-manager, ... }: {
-    nixosConfigurations.null = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.Cyclops = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
       specialArgs = {
