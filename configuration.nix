@@ -38,6 +38,10 @@ users.users.null = {
   packages = with pkgs; [];
 };
 
+users.users.root = {
+shell = pkgs.zsh;
+};
+
 services.logind.lidSwitch = "ignore";
 
 

@@ -1,12 +1,12 @@
 { config, pkgs, unstablePkgs, ... } : {
 
 imports = [
-  ./home/sway/sway.nix
   ./home/nvim/nvim.nix
   ./home/alacritty/alacritty.nix
   ./home/wofi/wofi.nix
   ./home/waybar/waybar.nix
   ./home/starship/starship.nix
+  ./home/hyprland/hyprland.nix
 ];
 
 home.username = "null";

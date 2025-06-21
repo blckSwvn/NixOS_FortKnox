@@ -24,6 +24,7 @@ environment.systemPackages = with pkgs; [
   #etc
   tldr
   #DE
+  swaybg
   wofi
   playerctl
   wl-clipboard
@@ -37,7 +38,7 @@ environment.systemPackages = with pkgs; [
   clang-tools
   gcc
 ] ++ (with unstablePkgs; [
-  #unstable pkgs here
+  jdk
 ]);
 
 

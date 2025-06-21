@@ -1,12 +1,12 @@
 { config, pkgs, ... } : {
 
-home.file.".config/sway" = {
+home.file.".config/hypr" = {
   source = ./config;
   recursive = true;
   };
 
 home.packages = with pkgs; [
-  sway
-  autotiling
+  hyprland
+  bibata-cursors
   ];
 }

@@ -1,6 +1,8 @@
 { config, pkgs, ... } : {
 
 #zsh
+programs.zoxide.enableZshIntegration = true;
+programs.zoxide.enable = true;
 programs.zsh = {
   enable = true;
   enableCompletion = true;
@@ -20,6 +22,8 @@ programs.zsh = {
   '';
   shellAliases = {
     ".." = "cd ..";
+    "~" = "cd ~";
+    "nixshell" = "nix-shell --run zsh";
     vim = "nvim";
     vimf = "nvimf";
     rebuild = "sudo nixos-rebuild switch --flake /home/null/NixOS_FortKnox#Cyclops";

@@ -10,7 +10,7 @@
   "custom/date",
   ],
   "modules-center": [
-    "sway/workspaces"
+    "hyprland/workspaces"
   ],
   "modules-right": [
     "network",
@@ -18,15 +18,19 @@
   ],
 
   // Modules configuration
-  "sway/workspaces": {
+  "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
       "active": "",
       "default": "",
-      "empty": ""
+      "empty": ""
     },
     "persistent-workspaces": {
-       "*": [ 1,2,3,4,5 ]
+    "1": {},
+    "2": {},
+    "3": {},
+    "4": {},
+    "5": {},
     }
   },
 
