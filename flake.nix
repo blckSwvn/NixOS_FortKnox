@@ -30,7 +30,7 @@
           nixpkgs.config.allowUnfree = true;
 
           # User home manager config
-          home-manager.users.null = import ./home.nix;
+          home-manager.users.blckSwan = import ./home.nix;
         })
       ];
     };

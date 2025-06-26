@@ -30,7 +30,7 @@ console.keyMap = "no";
 
 
 #user
-users.users.null = {
+users.users.blckSwan = {
   isNormalUser = true;
   description = "null";
   shell = pkgs.zsh;

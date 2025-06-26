@@ -9,8 +9,8 @@ imports = [
   ./home/hyprland/hyprland.nix
 ];
 
-home.username = "null";
-home.homeDirectory = "/home/null";
+home.username = "blckSwan";
+home.homeDirectory = "/home/blckSwan";
 
 home.stateVersion = "25.05";
 
