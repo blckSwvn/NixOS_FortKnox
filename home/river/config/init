@@ -1,0 +1,133 @@
+#!/bin/sh
+
+export XDG_CURRENT_DESKTOP=river
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=river
+
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+systemctl --user start xdg-desktop-portal-wlr.service &
+systemctl --user start xdg-desktop-portal.service &
+
+sleep 1
+waybar &
+
+#startup
+tileInit() {
+swaybg -i /home/blckSwan/Pictures/breakingBad.jpg &
+rivercarro &
+riverctl default-layout rivercarro
+riverctl send-layout-cmd rivercarro "main-count 2"
+riverctl send-layout-cmd rivercarro "main-ratio 0.5"
+riverctl send-layout-cmd rivercarro "gaps 0"
+riverctl send-layout-cmd rivercarro "inner-gaps 3"
+riverctl send-layout-cmd rivercarro "outer-gaps 0"
+riverctl send-layout-cmd rivercarro "width-ratio 1"
+riverctl send-layout-cmd rivercarro "no-smart-gaps"
+riverctl send-layout-cmd rivercarro "no-smart-gaps"
+riverctl send-layout-cmd rivercarro "main-location left"
+}
+riverctl focus-follows-cursor always
+
+riverctl border-color-focused 0xffffff
+riverctl border-color-unfocused 0x002244
+riverctl border-width 2
+
+riverctl rule-add '*' float=false
+
+#input lang
+riverctl keyboard-layout no
+
+mod="Mod1"
+mod2="Mod5"
+mod3="Super"
+
+#map aka binds
+#common lanching apps etc
+riverctl map normal $mod2 Space spawn alacritty
+riverctl map normal $mod b spawn librewolf
+riverctl map normal $mod2 f toggle-fullscreen
+riverctl map normal $mod Q close
+riverctl map normal $mod Space spawn "wofi --show drun"
+riverctl map normal $mod+Shift E exit
+riverctl map normal $mod f toggle-float
+
+#playerctl wpctl
+riverctl map normal $mod p spawn "playerctl play-pause"
+riverctl map normal $mod Right spawn "playerctl next" 
+riverctl map normal $mod Left spawn "playerctl previous"
+riverctl map normal $mod Up spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
+riverctl map normal $mod Down spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"
+
+#brightness ctl
+riverctl map normal $mod+Shift Up spawn "brightnessctl set 10%+"
+riverctl map normal $mod+Shift Down spawn "brightnessctl set 10%-"
+
+riverctl map normal $mod3 h send-to-output left
+riverctl map normal $mod3 l send-to-output right
+
+#navigation
+riverctl map normal $mod h focus-view left
+riverctl map normal $mod l focus-view right
+riverctl map normal $mod j focus-view down
+riverctl map normal $mod k focus-view up
+
+#snap FLOATING windows
+riverctl map normal $mod+Shift h snap left
+riverctl map normal $mod+Shift l snap right
+riverctl map normal $mod+Shift j snap down
+riverctl map normal $mod+Shift k snap up
+
+riverctl map normal $mod3 k send-layout-cmd rivercarro "main-count +1";
+riverctl map normal $mod3 j send-layout-cmd rivercarro "main-count -1"
+riverctl map normal $mod3 c send-layout-cmd rivercarro "main-location-cycle left,top,right"
+riverctl map normal $mod3 h send-layout-cmd rivercarro "main-ratio +0.1"
+riverctl map normal $mod3 l send-layout-cmd rivercarro "main-ratio -0.1"
+#tags
+#switch what tag you see
+riverctl map normal $mod2 q toggle-focused-tags 1
+riverctl map normal $mod2 w toggle-focused-tags 2
+riverctl map normal $mod2 e toggle-focused-tags 4
+riverctl map normal $mod2 r toggle-focused-tags 8
+riverctl map normal $mod2 t toggle-focused-tags 16
+riverctl map normal $mod2 y toggle-focused-tags 32
+riverctl map normal $mod2 u toggle-focused-tags 64
+riverctl map normal $mod2 i toggle-focused-tags 128
+riverctl map normal $mod2 o toggle-focused-tags 256
+riverctl map normal $mod2 p toggle-focused-tags 512
+
+riverctl map normal $mod2+Shift q set-view-tags 1
+riverctl map normal $mod2+Shift w set-view-tags 2
+riverctl map normal $mod2+Shift e set-view-tags 4
+riverctl map normal $mod2+Shift r set-view-tags 8
+riverctl map normal $mod2+Shift t set-view-tags 16
+riverctl map normal $mod2+Shift y set-view-tags 32
+riverctl map normal $mod2+Shift u set-view-tags 64
+riverctl map normal $mod2+Shift i set-view-tags 128
+riverctl map normal $mod2+Shift o set-view-tags 256
+riverctl map normal $mod2+Shift p set-view-tags 512
+#assigning tag to window
+riverctl map normal $mod2+$mod q toggle-view-tags 1
+riverctl map normal $mod2+$mod w toggle-view-tags 2
+riverctl map normal $mod2+$mod e toggle-view-tags 4
+riverctl map normal $mod2+$mod r toggle-view-tags 8
+riverctl map normal $mod2+$mod t toggle-view-tags 16
+riverctl map normal $mod2+$mod y toggle-view-tags 32
+riverctl map normal $mod2+$mod u toggle-view-tags 64
+riverctl map normal $mod2+$mod i toggle-view-tags 128
+riverctl map normal $mod2+$mod o toggle-view-tags 256
+riverctl map normal $mod2+$mod p toggle-view-tags 512
+
+riverctl map normal $mod+Shift q set-focused-tags 1
+riverctl map normal $mod+Shift w set-focused-tags 2
+riverctl map normal $mod+Shift e set-focused-tags 4
+riverctl map normal $mod+Shift r set-focused-tags 8
+riverctl map normal $mod+Shift t set-focused-tags 16
+riverctl map normal $mod+Shift y set-focused-tags 32
+riverctl map normal $mod+Shift u set-focused-tags 64
+riverctl map normal $mod+Shift i set-focused-tags 128
+riverctl map normal $mod+Shift o set-focused-tags 256
+riverctl map normal $mod+Shift p set-focused-tags 512
+
+tileInit
+riverctl focus-output next
+tileInit

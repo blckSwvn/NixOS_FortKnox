@@ -6,7 +6,7 @@ imports = [
   ./home/wofi/wofi.nix
   ./home/waybar/waybar.nix
   ./home/starship/starship.nix
-  ./home/hyprland/hyprland.nix
+  ./home/river/river.nix
 ];
 
 home.username = "blckSwan";

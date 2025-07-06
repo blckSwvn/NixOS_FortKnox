@@ -1,12 +1,13 @@
 { config, pkgs, ... } : {
 
-home.file.".config/hypr" = {
+home.file.".config/river" = {
   source = ./config;
   recursive = true;
   };
 
 home.packages = with pkgs; [
-  hyprland
-  bibata-cursors
+  river
+  xdg-desktop-portal
+  xdg-desktop-portal-wlr
   ];
 }

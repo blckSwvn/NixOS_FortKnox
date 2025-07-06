@@ -18,12 +18,14 @@ environment.systemPackages = with pkgs; [
   parted
   gnumake
   #progs
+  quickemu
   modrinth-app
   blueberry
   librewolf
   #etc
   tldr
   #DE
+  rivercarro
   swaybg
   wofi
   playerctl
@@ -38,14 +40,27 @@ environment.systemPackages = with pkgs; [
   clang-tools
   gcc
 ] ++ (with unstablePkgs; [
-  jdk
 ]);
-
 
 fonts.packages = with pkgs; [
   nerd-fonts.meslo-lg
   jetbrains-mono
 ];
+
+#xdg.portal = {
+#enable = true;
+#wlr.enable = true;
+#extraPortals = [pkgs.xdg-desktop-portal-gtk ];
+#};
+
+programs.steam = {
+ enable = true;
+};
+
+programs.hyprland = {
+enable = true;
+xwayland.enable = true;
+};
 
 programs.obs-studio = {
 enable = false; #disabled, runs heavy background processes

@@ -6,7 +6,7 @@ services.pipewire = {
   enable = true;
   jack.enable = false;
   alsa.enable = true;
-  alsa.support32Bit = false;
+  alsa.support32Bit = true;
   pulse.enable = true; #enable for qemu/quickemu
 };
 

@@ -1,91 +1,65 @@
-
 * {
-  border: none;
-  border-radius: 0;
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 13px;
-  min-height: 0;
+font-family: "jetbrainsMono Nerd Font", monospace;
+font-size: 13px;
 }
 
 window#waybar {
   background-color: transparent;
-  color: #DADADA; /* primary.foreground */
+  color: #DADADA;
 }
 
-/* Workspaces */
-#workspaces {
-  padding: 0 5px;
-  border-radius: 9999px;
-  margin: 0 4px;
-  background-color: #13131b;
-  box-shadow: 0 0 0px rgba(146, 190, 244, 0.35); /* cyan glow */
+#tags {
+  background-color: rgba(30, 40, 60, 0.8);
+  border-radius: 8px;
+  padding: 3px 0px;
+  margin: 1 1px;
 }
 
-#workspaces button {
+#tags button {
   all: unset;
-  padding: 0 8px;
-  color: #E0E0E0; /* normal.white */
-  transition: all 0.2s ease;
+  font-size: 12px;
+  margin: 2px 3px;
+  border-radius: 5px;
+  background-color: rgba(80, 80, 100, 0);
+  color: rgba(100, 100, 100, 0.4);
+  margin: 1px 2px; /* acts like gap */
+  padding: 4px 4px;
+  min-width: 20px;
+  transition: all 100ms ease; 
 }
 
-#workspaces button:hover {
-  text-shadow: 0 0 3px rgba(146, 190, 244, 0.7); /* cyan accent */
+/* Hover effect */
+#tags button:hover {
+  background-color: rgba(120, 120, 160, 0.8);
+  color: #ffffff;
 }
 
-#workspaces button.active {
-  color: #92bef4; /* cyan accent */
-  text-shadow: 0 0 0px #92bef4;
+/* Focused tag: slightly larger & more vibrant */
+#tags button.focused {
+  font-weight: bold;
+  background-color: #7094D7;
+  color: #fbfbfb;
 }
 
-#workspaces button.empty {
-  color: rgba(224, 224, 224, 0.08); /* faded white */
+/* Occupied */
+#tags button.occupied {
+  background-color: #4472Ca;
+  color: #fbfbfb;
 }
 
-#workspaces button.empty:hover {
-  color: rgba(224, 224, 224, 0.12);
-  text-shadow: 0 0 2px rgba(146, 190, 244, 0.3); /* cyan glow */
+/* Urgent (overrides others) */
+#tags button.urgent {
+  background-color: #ff0070;
+  color: #1e1e2e;
 }
 
-/* General module styling */
 #clock,
+#pulseaudio,
 #network,
 #battery,
-#custom-date {
-  padding: 0 10px;
-  margin: 0 4px;
-  background-color: rgba(19, 19, 27, 1); /* primary.background */
+#tray {
+  background-color: rgba(30, 40, 60, 0.8);
+  margin: 2px 3px;
   border-radius: 8px;
-  box-shadow: 0 0 5px rgba(64, 64, 64, 0.5);
-  color: #DADADA;
-  transition: background 0.3s ease;
+  padding: 1px 8px;
 }
-
-#clock:hover,
-#network:hover,
-#battery:hover,
-#custom-date:hover {
-  background-color: rgba(92, 92, 92, 0.2); /* bright.black overlay */
-}
-
-/* ⚙️ Capsule styling for center trio */
-#custom-date {
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  margin: 0 4px;
-  padding-right: 12px;
-}
-
-/* Battery state styling */
-#battery.warning {
-  color: #F5BC00; /* yellow */
-}
-
-#battery.critical {
-  color: #E00022; /* red */
-  background-color: rgba(224, 0, 34, 0.15);
-}
-
-#battery.charging {
-  color: #61D1C0; /* bright.green */
-}
-
