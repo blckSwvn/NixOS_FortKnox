@@ -78,7 +78,7 @@ riverctl map normal $mod2 j snap down
 riverctl map normal $mod2 k snap up
 riverctl map normal $mod3 h focus-output left
 riverctl map normal $mod3 j focus-output down
-riverctl map normal $mod3 k focus-output up
+riverctl map normal $mod3 k focus-output upup
 riverctl map normal $mod3 l focus-output right
 riverctl map normal $mod3+Shift k send-layout-cmd rivercarro "main-count +1";
 riverctl map normal $mod3+Shift j send-layout-cmd rivercarro "main-count -1"
