@@ -25,7 +25,6 @@ environment.systemPackages = with pkgs; [
   #etc
   tldr
   #DE
-  rivercarro
   swaybg
   wofi
   playerctl
@@ -47,11 +46,17 @@ fonts.packages = with pkgs; [
   jetbrains-mono
 ];
 
-#xdg.portal = {
-#enable = true;
-#wlr.enable = true;
-#extraPortals = [pkgs.xdg-desktop-portal-gtk ];
-#};
+services.keyd = {
+  enable = true;
+  keyboards.default = {
+    ids = [ "*" ];
+    settings = {
+    main = {
+      capslock = "esc";
+      };
+    };
+  };
+};
 
 programs.steam = {
  enable = true;

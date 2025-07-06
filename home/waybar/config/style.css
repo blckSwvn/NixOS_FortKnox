@@ -38,12 +38,13 @@ window#waybar {
 #tags button.focused {
   font-weight: bold;
   background-color: #7094D7;
+  padding: 4px 10px;
   color: #fbfbfb;
 }
 
 /* Occupied */
 #tags button.occupied {
-  background-color: #4472Ca;
+  background-color: #447bC0;
   color: #fbfbfb;
 }
 

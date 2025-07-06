@@ -62,8 +62,8 @@ riverctl map normal $mod Down spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"
 riverctl map normal $mod+Shift Up spawn "brightnessctl set 10%+"
 riverctl map normal $mod+Shift Down spawn "brightnessctl set 10%-"
 
-riverctl map normal $mod3 h send-to-output left
-riverctl map normal $mod3 l send-to-output right
+riverctl map normal $mod+Shift h focus-output left 
+riverctl map normal $mod+Shift l send-to-output right
 
 #navigation
 riverctl map normal $mod h focus-view left
@@ -72,16 +72,19 @@ riverctl map normal $mod j focus-view down
 riverctl map normal $mod k focus-view up
 
 #snap FLOATING windows
-riverctl map normal $mod+Shift h snap left
-riverctl map normal $mod+Shift l snap right
-riverctl map normal $mod+Shift j snap down
-riverctl map normal $mod+Shift k snap up
-
-riverctl map normal $mod3 k send-layout-cmd rivercarro "main-count +1";
-riverctl map normal $mod3 j send-layout-cmd rivercarro "main-count -1"
-riverctl map normal $mod3 c send-layout-cmd rivercarro "main-location-cycle left,top,right"
-riverctl map normal $mod3 h send-layout-cmd rivercarro "main-ratio +0.1"
-riverctl map normal $mod3 l send-layout-cmd rivercarro "main-ratio -0.1"
+riverctl map normal $mod2 h snap left
+riverctl map normal $mod2 l snap right
+riverctl map normal $mod2 j snap down
+riverctl map normal $mod2 k snap up
+riverctl map normal $mod3 h focus-output left
+riverctl map normal $mod3 j focus-output down
+riverctl map normal $mod3 k focus-output up
+riverctl map normal $mod3 l focus-output right
+riverctl map normal $mod3+Shift k send-layout-cmd rivercarro "main-count +1";
+riverctl map normal $mod3+Shift j send-layout-cmd rivercarro "main-count -1"
+riverctl map normal $mod3+Shift c send-layout-cmd rivercarro "main-location-cycle left,top,right"
+riverctl map normal $mod3+Shift h send-layout-cmd rivercarro "main-ratio +0.1"
+riverctl map normal $mod3+Shift l send-layout-cmd rivercarro "main-ratio -0.1"
 #tags
 #switch what tag you see
 riverctl map normal $mod2 q toggle-focused-tags 1

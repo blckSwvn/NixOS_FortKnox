@@ -7,6 +7,7 @@ home.file.".config/river" = {
 
 home.packages = with pkgs; [
   river
+  rivercarro
   xdg-desktop-portal
   xdg-desktop-portal-wlr
   ];

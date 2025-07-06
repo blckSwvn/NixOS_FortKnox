@@ -8,8 +8,8 @@ Aims for safety, performance, productivity, and ease of maintenance and use.
 - Uses flakes  
 - Home Manager integration  
 - Modular configuration  
-- Nvidia Prime Sync support  
-- zsh with aliases, fzf, and customized to my workflow
+- Nvidia Prime Sync drivers
+- zsh with aliases, starship, fzf, zoxide and customized to my workflow
 
 ---
 
