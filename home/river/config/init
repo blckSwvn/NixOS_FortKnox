@@ -80,6 +80,10 @@ riverctl map normal $mod3 h focus-output left
 riverctl map normal $mod3 j focus-output down
 riverctl map normal $mod3 k focus-output upup
 riverctl map normal $mod3 l focus-output right
+riverctl map normal $mod3+$mod h send-to-output left
+riverctl map normal $mod3+$mod j send-to-output down
+riverctl map normal $mod3+$mod k send-to-output upup
+riverctl map normal $mod3+$mod l send-to-output right
 riverctl map normal $mod3+Shift k send-layout-cmd rivercarro "main-count +1";
 riverctl map normal $mod3+Shift j send-layout-cmd rivercarro "main-count -1"
 riverctl map normal $mod3+Shift c send-layout-cmd rivercarro "main-location-cycle left,top,right"
