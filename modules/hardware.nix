@@ -1,4 +1,4 @@
-{ config, pkgs, ... } : {
+{ config, pkgs, lib, ... } : {
 #sound
 hardware.pulseaudio.enable = false;
 security.rtkit.enable = false;
@@ -13,13 +13,14 @@ services.pipewire = {
 #bloat
 services = {
   printing.enable = false;
+  systemd-oomd.enable = false;
+  nscd.enable = false;
   avahi.enable = false;
   dbus.enable = true;
-  acpid.enable = false;
   xserver.enable = false;
 };
 
-security.polkit.enable = false;
+security.polkit.enable = lib.mkForce false;
 
 
 hardware.bluetooth = {

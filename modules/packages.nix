@@ -5,9 +5,7 @@ environment.systemPackages = with pkgs; [
   #term
   starship
   bash
-  unrar
   wineWowPackages.full
-  networkmanagerapplet
   bat
   brightnessctl
   neovim
@@ -35,7 +33,7 @@ environment.systemPackages = with pkgs; [
   fastfetch
   nitch
   #langs/lsps
-  nil
+  nixd
   clang-tools
   gcc
 ] ++ (with unstablePkgs; [
@@ -60,11 +58,6 @@ services.keyd = {
 
 programs.steam = {
  enable = true;
-};
-
-programs.hyprland = {
-enable = true;
-xwayland.enable = true;
 };
 
 programs.obs-studio = {
