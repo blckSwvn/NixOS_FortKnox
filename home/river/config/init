@@ -13,7 +13,7 @@ waybar &
 
 #startup
 tileInit() {
-swaybg -i /home/blckSwan/Pictures/breakingBad.jpg &
+swaybg -i /home/blckSwan/Pictures/wallpaper.jpg &
 rivercarro &
 riverctl default-layout rivercarro
 riverctl send-layout-cmd rivercarro "main-count 2"
