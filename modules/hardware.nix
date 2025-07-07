@@ -1,7 +1,7 @@
 { config, pkgs, ... } : {
 #sound
 hardware.pulseaudio.enable = false;
-security.rtkit.enable = true;
+security.rtkit.enable = false;
 services.pipewire = {
   enable = true;
   jack.enable = false;
@@ -15,7 +15,11 @@ services = {
   printing.enable = false;
   avahi.enable = false;
   dbus.enable = true;
+  acpid.enable = false;
+  xserver.enable = false;
 };
+
+security.polkit.enable = false;
 
 
 hardware.bluetooth = {

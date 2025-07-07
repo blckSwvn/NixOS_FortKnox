@@ -3,7 +3,8 @@
 #networking
 networking = {
   hostName = "Cyclops"; # Define your hostname.
-  networkmanager.enable = true;
+  networkmanager.enable = false;
+  useNetworkd = true;
   firewall = {
     enable = true;
     allowedTCPPorts = [
@@ -16,6 +17,9 @@ networking = {
     ];
   };
 };
+
+networking.wireless.iwd.enable = true;
+services.dbus.enable = true;
 
 #Fail2ban
 services.fail2ban = {
