@@ -13,13 +13,13 @@ services.pipewire = {
 #bloat
 services = {
   printing.enable = false;
-  systemd-oomd.enable = false;
-  nscd.enable = false;
+  nscd.enable = lib.mkForce false;
   avahi.enable = false;
   dbus.enable = true;
   xserver.enable = false;
 };
-
+system.nssModules = lib.mkForce [];
+systemd.oomd.enable = false;
 security.polkit.enable = lib.mkForce false;
 
 
