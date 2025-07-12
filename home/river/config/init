@@ -41,10 +41,13 @@ mod="Mod1"
 mod2="Mod5"
 mod3="Super"
 
+#rules
+riverctl rule-add -app-id librwolf tags 4
+
 #map aka binds
 #common lanching apps etc
 riverctl map normal $mod2 Space spawn alacritty
-riverctl map normal $mod b spawn librewolf
+riverctl map normal $mod2 b spawn librewolf
 riverctl map normal $mod2 f toggle-fullscreen
 riverctl map normal $mod Q close
 riverctl map normal $mod Space spawn "wofi --show drun"

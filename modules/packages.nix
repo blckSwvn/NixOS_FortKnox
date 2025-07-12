@@ -1,4 +1,4 @@
-{ config, pkgs, unstablePkgs, ... } : {
+{ config, pkgs, unstablePkgs, lib, ... } : {
 
 #packages
 environment.systemPackages = with pkgs; [
@@ -43,6 +43,8 @@ fonts.packages = with pkgs; [
   nerd-fonts.meslo-lg
   jetbrains-mono
 ];
+
+#fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
 services.keyd = {
   enable = true;

@@ -23,11 +23,11 @@ boot = {
   kernelModules = [
     "nvidia"
     #"exfat" 
-    "vfio" #PCI passthrough isolation for virtualization
-    "vfio_pci"
+    "vfio" #passthrough isolation for virtualization
+    "vfio_pci" #PCI passthrough isolation for virtualization
   ];
   kernelParams = [
-  "block.mq"
+  "block.mq=on"
   "nowatchdog"
   "amd_iommu=on" #virtualization for amd
   "loglevel=3" #only errors and beyond are logged change how needed 4:warning 5:notice 6:info 7:debug
@@ -63,5 +63,7 @@ boot = {
 };
 
   security.protectKernelImage = true;
-  security.lockKernelModules = true;
+
+  #will prevent network module from loading unless excplictly declared in KernelModules = [];
+  security.lockKernelModules = false;
 }

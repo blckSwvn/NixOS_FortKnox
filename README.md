@@ -33,3 +33,15 @@ sudo nixos-rebuild switch --flake .#Cyclops
 sudo nixos-rebuild switch --flake github:AwfullyBlank/NixOS_FortKnox#main
 ```
 **Note:** to make any changes now or later, cloning the repo(recommended method) is necessary.
+
+## making and burning ISO
+
+### making
+```bash
+nix build #nixosConfigurations.iso.config.system.build.isoImage
+```
+
+### burning
+```bash
+sudo dd if=./nixos.iso of=/dev/sdX bs=4M status=progress oflag=sync
+```

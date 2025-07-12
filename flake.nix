@@ -34,5 +34,20 @@
         })
       ];
     };
+
+    nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        unstablePkgs = import unstable {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+      };
+
+      modules = [
+        ./isoConfiguration.nix
+        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+      ];
+    };
   };
 }
