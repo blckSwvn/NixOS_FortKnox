@@ -6,7 +6,7 @@ imports = [
 ./modules/networking.nix
 ];
 
-isoImage.isoName = "nixos"
+isoImage.isoName = "nixos";
 
 nix.settings = {
 auto-optimise-store = true;

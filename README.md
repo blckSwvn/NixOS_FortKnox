@@ -43,5 +43,5 @@ nix build #nixosConfigurations.iso.config.system.build.isoImage
 
 ### burning
 ```bash
-sudo dd if=./nixos.iso of=/dev/sdX bs=4M status=progress oflag=sync
+sudo dd if=./result/iso/nixos-minimal-25.05.20250602.10d7f8d-x86_64-linux.iso of=/dev/sdb bs=16M status=progress oflag=sync
 ```
