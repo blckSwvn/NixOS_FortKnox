@@ -50,10 +50,6 @@ security.doas = {
   }];
 };
 
-programs.bash.shellAliasses = {
-sudo = "doas";
-};
-
 #disable sudo since doas
 security.sudo.enable = false;
 

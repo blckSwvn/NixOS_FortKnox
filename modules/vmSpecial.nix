@@ -1,12 +1,11 @@
 {config, pkgs, unstablePkgs, ... }: {
 
-specialisation.vm = {
+specialisation.vm.configuration = {
   environment.systemPackages = with pkgs; [
     quickemu
     qemu_kvm
     spice-gtk
     virtiofsd
-    pcieutils
   ];
 
   boot.kernelModules = [
