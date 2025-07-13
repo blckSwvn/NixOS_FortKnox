@@ -8,6 +8,7 @@ imports =
     ./modules/networking.nix
     ./modules/packages.nix
     ./modules/zsh.nix
+    ./modules/vmSpecial.nix
   ];
 
 
@@ -34,9 +35,27 @@ users.users.blckSwan = {
   isNormalUser = true;
   description = "null";
   shell = pkgs.zsh;
-  extraGroups = [ "networkmanager" "wheel" ];
-  packages = with pkgs; [];
+  extraGroups = [
+  "kvm"
+  "input"
+  ];
 };
+#openBSD replacment for sudo its safer less LOC 
+security.doas = {
+  enable = true;
+  extraRules = [{
+  users = ["blckSwan"];
+  keepEnv = true;
+  persist = false;
+  }];
+};
+
+programs.bash.shellAliasses = {
+sudo = "doas";
+};
+
+#disable sudo since doas
+security.sudo.enable = false;
 
 users.users.root = {
 shell = pkgs.zsh;

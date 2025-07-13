@@ -23,7 +23,7 @@ programs.zsh = {
   shellAliases = {
     ".." = "cd ..";
     "~" = "cd ~";
-    "nixshell" = "nix-shell --run zsh";
+    nixshell = "nix-shell --run zsh";
     vim = "nvim";
     vimf = "nvimf";
     rebuild = "sudo nixos-rebuild switch --flake /home/blckSwan/NixOS_FortKnox#Cyclops";
@@ -31,6 +31,7 @@ programs.zsh = {
     gc = "git commit";
     gp = "git push origin main";
     gs = "git status";
+    sudo = "doas";
   };
   shellInit = ''
 

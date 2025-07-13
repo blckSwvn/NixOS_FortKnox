@@ -23,13 +23,10 @@ boot = {
   kernelModules = [
     "nvidia"
     #"exfat" 
-    "vfio" #passthrough isolation for virtualization
-    "vfio_pci" #PCI passthrough isolation for virtualization
   ];
   kernelParams = [
   "block.mq=on"
   "nowatchdog"
-  "amd_iommu=on" #virtualization for amd
   "loglevel=3" #only errors and beyond are logged change how needed 4:warning 5:notice 6:info 7:debug
   "amd_pstate=active" #better for newer CPUs
   ];
