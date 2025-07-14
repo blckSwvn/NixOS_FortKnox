@@ -141,3 +141,6 @@ riverctl map normal $mod+Shift p set-focused-tags 512
 tileInit
 riverctl focus-output next
 tileInit
+
+wlr-randr --output HDMI-A-1 --pos 0,0
+wlr-randr --output eDP-1 --pos 1920,0
