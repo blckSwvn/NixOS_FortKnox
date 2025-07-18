@@ -2,7 +2,7 @@
 
 imports = [
   ./home/nvim/nvim.nix
-  ./home/alacritty/alacritty.nix
+  ./home/kitty/kitty.nix
   ./home/wofi/wofi.nix
   ./home/waybar/waybar.nix
   ./home/starship/starship.nix

@@ -42,11 +42,11 @@ mod2="Mod5"
 mod3="Super"
 
 #rules
-riverctl rule-add -app-id librwolf tags 4
+riverctl rule-add -app-id librewolf tags 4
 
 #map aka binds
 #common lanching apps etc
-riverctl map normal $mod2 Space spawn alacritty
+riverctl map normal $mod2 Space spawn kitty
 riverctl map normal $mod2 b spawn librewolf
 riverctl map normal $mod2 f toggle-fullscreen
 riverctl map normal $mod Q close
