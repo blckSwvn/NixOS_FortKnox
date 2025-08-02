@@ -53,6 +53,7 @@ riverctl map normal $mod Q close
 riverctl map normal $mod Space spawn "wofi --show drun"
 riverctl map normal $mod+Shift E exit
 riverctl map normal $mod f toggle-float
+riverctl map normal $mod3+Shift s spawn "DRI_PRIME=0 steam"
 
 #playerctl wpctl
 riverctl map normal $mod p spawn "playerctl play-pause"

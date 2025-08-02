@@ -1,7 +1,7 @@
 { config, pkgs, unstablePkgs, ... } : {
 
 imports = [
-  ./home/nvim/nvim.nix
+  #./home/nvim/nvim.nix
   ./home/kitty/kitty.nix
   ./home/wofi/wofi.nix
   ./home/waybar/waybar.nix

@@ -8,40 +8,37 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "uas" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/87929198-02b9-4c9a-b032-d69cbd51508a";
+    { device = "/dev/disk/by-uuid/4fb89d75-0c64-4698-88ef-4aca3a5e3a6e";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-f58b3fad-82b3-46b8-a760-8b71b0f42077".device = "/dev/disk/by-uuid/f58b3fad-82b3-46b8-a760-8b71b0f42077";
+  boot.initrd.luks.devices."luks-3444364e-810a-41db-84f8-259087113930".device = "/dev/disk/by-uuid/3444364e-810a-41db-84f8-259087113930";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4947-E6DE";
+    { device = "/dev/disk/by-uuid/797D-D82A";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/a586afad-a186-47a4-a94f-29bed7610ac8";
+  fileSystems."/nix/store" =
+    { device = "/dev/disk/by-uuid/b2e1f42b-3fb8-461a-ad47-2ccc82c3d98d";
       fsType = "ext4";
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/d00e9275-8452-44ea-8daf-e0d20f72f5f6"; }
-    ];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp4s0f0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

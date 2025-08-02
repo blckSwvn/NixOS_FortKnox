@@ -24,8 +24,8 @@ programs.zsh = {
     ".." = "cd ..";
     "~" = "cd ~";
     nixshell = "nix-shell --run zsh";
-    vim = "nvim";
-    vimf = "nvimf";
+    v = "nvim";
+    vf = "nvimf";
     rebuild = "doas env GIT_ALLOW_ROOT=1 nixos-rebuild switch --flake path:/home/blckSwan/NixOS_FortKnox#Cyclops";
     fetch = "fastfetch";
     gc = "git commit";

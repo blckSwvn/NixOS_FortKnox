@@ -5,7 +5,5 @@ home.file.".config/nvim" = {
   recursive = true;
   };
 
-home.packages = with pkgs; [
-  neovim
-  ];
+#installed directly through flake
 }

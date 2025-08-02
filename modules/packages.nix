@@ -8,7 +8,6 @@ environment.systemPackages = with pkgs; [
   wineWowPackages.full
   bat
   brightnessctl
-  neovim
   git
   btop
   fzf
