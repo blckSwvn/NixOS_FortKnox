@@ -34,6 +34,7 @@ environment.systemPackages = with pkgs; [
   #langs/lsps
   nixd
   clang-tools
+  lua-language-server
   gcc
 ] ++ (with unstablePkgs; [
 ]);

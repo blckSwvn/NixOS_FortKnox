@@ -13,23 +13,25 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4fb89d75-0c64-4698-88ef-4aca3a5e3a6e";
-      fsType = "ext4";
-    };
+fileSystems."/boot" = {
+	device = "/dev/disk/by-label/BOOT";
+	fsType = "vfat";
+};
 
-  boot.initrd.luks.devices."luks-3444364e-810a-41db-84f8-259087113930".device = "/dev/disk/by-uuid/3444364e-810a-41db-84f8-259087113930";
+fileSystems."/nix/store" = {
+	device = "/dev/disk/by-label/NIX";
+	fsType = "ext4";
+	options = [ "noatime" ];
+};
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/797D-D82A";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+fileSystems."/" = {
+	device = "/dev/mapper/cryptroot";
+	fsType = "ext4";
+};
 
-  fileSystems."/nix/store" =
-    { device = "/dev/disk/by-uuid/b2e1f42b-3fb8-461a-ad47-2ccc82c3d98d";
-      fsType = "ext4";
-    };
+boot.initrd.luks.devices.cryptroot = {
+	device = "/dev/disk/by-label/ROOT";
+};
 
   swapDevices = [ ];
 
