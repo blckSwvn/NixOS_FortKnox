@@ -15,7 +15,6 @@ environment.systemPackages = with pkgs; [
   parted
   gnumake
   #progs
-  quickemu
   modrinth-app
   blueberry
   librewolf

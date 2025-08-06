@@ -8,6 +8,10 @@ specialisation.vm.configuration = {
     virtiofsd
   ];
 
+services.udev.extraRules = ''
+	ACTION=="add", KERNEL=="nvme1n1", GROUP="qemu", MODE="0660"
+'';
+
   boot.kernelModules = [
     "kvm"
     "kvm_amd"

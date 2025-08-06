@@ -37,6 +37,7 @@ users.users.blckSwan = {
   extraGroups = [
   "kvm"
   "input"
+  "qemu"
   ];
 };
 #openBSD replacment for sudo its safer less LOC 

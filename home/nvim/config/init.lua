@@ -1,4 +1,6 @@
 -- opts
+vim.o.termguicolors = true
+vim.loader.enable()
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.cursorline = true
@@ -7,6 +9,8 @@ vim.o.tabstop = 8
 vim.o.expandtab = false
 vim.o.smartindent = true
 vim.o.swapfile = false
+vim.o.backup = false
+vim.o.writebackup = false
 vim.opt.clipboard = "unnamedplus"
 
 -- binds
