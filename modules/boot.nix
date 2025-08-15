@@ -21,10 +21,13 @@ boot = {
   
   kernelPackages = unstablePkgs.linuxPackages_zen;
   kernelModules = [
-    "nvidia"
+  	"kvm"
+	"kvm_amd"
+    	"nvidia"
     #"exfat" 
   ];
   kernelParams = [
+  "amd_iommu=on"
   "block.mq=on"
   "nowatchdog"
   "loglevel=3" #only errors and beyond are logged change how needed 4:warning 5:notice 6:info 7:debug

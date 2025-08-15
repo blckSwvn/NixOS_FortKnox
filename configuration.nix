@@ -1,14 +1,12 @@
 { config, pkgs, ... }: {
 
 imports = [
-	# Include the results of the hardware scan.
 	./hardware-configuration.nix
 	./modules/boot.nix
 	./modules/hardware.nix
 	./modules/networking.nix
 	./modules/packages.nix
 	./modules/zsh.nix
-	./modules/vmSpecial.nix
 ];
 
 #nix settings
@@ -28,7 +26,6 @@ i18n.defaultLocale = "en_US.UTF-8";
 # Configure console keymap
 console.keyMap = "no";
 
-
 #user
 users.users.blckSwan = {
   isNormalUser = true;
@@ -37,7 +34,6 @@ users.users.blckSwan = {
   extraGroups = [
   "kvm"
   "input"
-  "qemu"
   ];
 };
 #openBSD replacment for sudo its safer less LOC 
@@ -57,6 +53,7 @@ users.users.root = {
 shell = pkgs.zsh;
 };
 
+#for laptops laptop 
 services.logind.lidSwitch = "ignore";
 
 

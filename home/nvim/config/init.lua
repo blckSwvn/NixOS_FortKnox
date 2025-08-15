@@ -15,7 +15,6 @@ vim.opt.clipboard = "unnamedplus"
 
 -- binds
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>s", ":so<CR>")
 
 vim.keymap.set("n", "<leader>f", ":FzfLua files<CR>")
 vim.keymap.set("n", "<leader>g", ":FzfLua grep<CR>")
@@ -55,14 +54,19 @@ vim.pack.add({
 	{src = "https://github.com/echasnovski/mini.nvim"},
 	{src = "https://github.com/tpope/vim-fugitive"},
 	{src = "https://github.com/lewis6991/gitsigns.nvim"},
+	{src = "https://github.com/leath-dub/snipe.nvim"},
 })
 
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {"c", "lua", "nix"},
 	highlight = {enable = true},
 })
+
 require("nvim-autopairs").setup()
-require("ibl").setup()
+require("ibl").setup({
+	scope = { enabled = true},
+})
+
 require("mini.files").setup({
 	mappings = {
 		synchronize = "W",
@@ -108,3 +112,7 @@ cmp.setup({
 })
 
 require("gitsigns").setup()
+
+local snipe = require("snipe")
+snipe.setup()
+vim.keymap.set("n", "s", snipe.open_buffer_menu)

@@ -38,7 +38,7 @@ services.fail2ban = {
 
 #SSH
 services.openssh = {
-  enable = false;
+  enable = true;
   passwordAuthentication = false;
   useDns = true;
   permitRootLogin = "no";
