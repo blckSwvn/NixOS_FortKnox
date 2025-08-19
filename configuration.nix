@@ -54,8 +54,12 @@ shell = pkgs.zsh;
 };
 
 #for laptops laptop 
-services.logind.lidSwitch = "ignore";
-
+services.logind.extraConfig = ''
+	handleLidSwitch=suspend;
+	HandleLidSwitchDocked=ignore;
+	IdleAction=poweroff;
+	IdleActionSec=30min;
+'';
 
 environment.variables = {
 MANPAGER = "nvim +Man!";

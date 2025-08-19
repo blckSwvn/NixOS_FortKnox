@@ -51,7 +51,7 @@ riverctl map normal $mod2 b spawn librewolf
 riverctl map normal $mod2 f toggle-fullscreen
 riverctl map normal $mod Q close
 riverctl map normal $mod Space spawn "wofi --show drun"
-riverctl map normal $mod+Shift E exit
+#riverctl map normal $mod+Shift E exit
 riverctl map normal $mod f toggle-float
 riverctl map normal $mod3+Shift s spawn "DRI_PRIME=0 steam"
 
@@ -95,49 +95,39 @@ riverctl map normal $mod3+Shift h send-layout-cmd rivercarro "main-ratio +0.1"
 riverctl map normal $mod3+Shift l send-layout-cmd rivercarro "main-ratio -0.1"
 #tags
 #switch what tag you see
-riverctl map normal $mod2 q toggle-focused-tags 1
-riverctl map normal $mod2 w toggle-focused-tags 2
-riverctl map normal $mod2 e toggle-focused-tags 4
-riverctl map normal $mod2 r toggle-focused-tags 8
-riverctl map normal $mod2 t toggle-focused-tags 16
-riverctl map normal $mod2 y toggle-focused-tags 32
-riverctl map normal $mod2 u toggle-focused-tags 64
-riverctl map normal $mod2 i toggle-focused-tags 128
-riverctl map normal $mod2 o toggle-focused-tags 256
-riverctl map normal $mod2 p toggle-focused-tags 512
+riverctl map normal $mod+Shift 1 toggle-focused-tags 1
+riverctl map normal $mod+Shift 2 toggle-focused-tags 2
+riverctl map normal $mod+Shift 3 toggle-focused-tags 4
+riverctl map normal $mod+Shift 4 toggle-focused-tags 8
+riverctl map normal $mod+Shift 5 toggle-focused-tags 16
+riverctl map normal $mod+Shift 6 toggle-focused-tags 32
+riverctl map normal $mod+Shift 7 toggle-focused-tags 64
+riverctl map normal $mod+Shift 8 toggle-focused-tags 128
+riverctl map normal $mod+Shift 9 toggle-focused-tags 256
+riverctl map normal $mod+Shift 0 toggle-focused-tags 512
 
-riverctl map normal $mod2+Shift q set-view-tags 1
-riverctl map normal $mod2+Shift w set-view-tags 2
-riverctl map normal $mod2+Shift e set-view-tags 4
-riverctl map normal $mod2+Shift r set-view-tags 8
-riverctl map normal $mod2+Shift t set-view-tags 16
-riverctl map normal $mod2+Shift y set-view-tags 32
-riverctl map normal $mod2+Shift u set-view-tags 64
-riverctl map normal $mod2+Shift i set-view-tags 128
-riverctl map normal $mod2+Shift o set-view-tags 256
-riverctl map normal $mod2+Shift p set-view-tags 512
+riverctl map normal $mod2+Shift 1 set-view-tags 1
+riverctl map normal $mod2+Shift 2 set-view-tags 2
+riverctl map normal $mod2+Shift 3 set-view-tags 4
+riverctl map normal $mod2+Shift 4 set-view-tags 8
+riverctl map normal $mod2+Shift 5 set-view-tags 16
+riverctl map normal $mod2+Shift 6 set-view-tags 32
+riverctl map normal $mod2+Shift 7 set-view-tags 64
+riverctl map normal $mod2+Shift 8 set-view-tags 128
+riverctl map normal $mod2+Shift 9 set-view-tags 256
+riverctl map normal $mod2+Shift 0 set-view-tags 512
 #assigning tag to window
-riverctl map normal $mod2+$mod q toggle-view-tags 1
-riverctl map normal $mod2+$mod w toggle-view-tags 2
-riverctl map normal $mod2+$mod e toggle-view-tags 4
-riverctl map normal $mod2+$mod r toggle-view-tags 8
-riverctl map normal $mod2+$mod t toggle-view-tags 16
-riverctl map normal $mod2+$mod y toggle-view-tags 32
-riverctl map normal $mod2+$mod u toggle-view-tags 64
-riverctl map normal $mod2+$mod i toggle-view-tags 128
-riverctl map normal $mod2+$mod o toggle-view-tags 256
-riverctl map normal $mod2+$mod p toggle-view-tags 512
 
-riverctl map normal $mod+Shift q set-focused-tags 1
-riverctl map normal $mod+Shift w set-focused-tags 2
-riverctl map normal $mod+Shift e set-focused-tags 4
-riverctl map normal $mod+Shift r set-focused-tags 8
-riverctl map normal $mod+Shift t set-focused-tags 16
-riverctl map normal $mod+Shift y set-focused-tags 32
-riverctl map normal $mod+Shift u set-focused-tags 64
-riverctl map normal $mod+Shift i set-focused-tags 128
-riverctl map normal $mod+Shift o set-focused-tags 256
-riverctl map normal $mod+Shift p set-focused-tags 512
+riverctl map normal $mod 1 set-focused-tags 1
+riverctl map normal $mod 2 set-focused-tags 2
+riverctl map normal $mod 3 set-focused-tags 4
+riverctl map normal $mod 4 set-focused-tags 8
+riverctl map normal $mod 5 set-focused-tags 16
+riverctl map normal $mod 6 set-focused-tags 32
+riverctl map normal $mod 7 set-focused-tags 64
+riverctl map normal $mod 8 set-focused-tags 128
+riverctl map normal $mod 9 set-focused-tags 256
+riverctl map normal $mod 0 set-focused-tags 512
 
 tileInit
 riverctl focus-output next

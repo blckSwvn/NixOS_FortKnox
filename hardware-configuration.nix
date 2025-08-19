@@ -25,7 +25,7 @@ fileSystems."/nix/store" = {
 };
 
 fileSystems."/" = {
-	device = "/dev/mapper/cryptroot";
+	device = "/dev/disk/by-label/ROOT";
 	fsType = "ext4";
 };
 
@@ -37,7 +37,7 @@ swapDevices = [
 ];
 
 boot.initrd.luks.devices.cryptroot = {
-	device = "/dev/disk/by-label/ROOT";
+	device = "/dev/disk/by-label/cryptroot";
 };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
