@@ -7,7 +7,8 @@ boot = {
       enable = true;
       efiSupport = true;
       device = "nodev";
-      useOSProber = true;
+#useOSProber = true if you use multable oses
+      useOSProber = false;
     };
     efi.canTouchEfiVariables = true;
   };
@@ -19,7 +20,8 @@ boot = {
     #"exfat"
   ];
   
-  kernelPackages = unstablePkgs.linuxPackages_zen;
+  kernelPackages = unstablePkgs.linuxPackages;
+
   kernelModules = [
   	"kvm"
 	"kvm_amd"
@@ -64,6 +66,6 @@ boot = {
 
   security.protectKernelImage = true;
 
-  #will prevent network module from loading unless excplictly declared in KernelModules = [];
+  #if set to true will preven network module from loading
   security.lockKernelModules = false;
 }

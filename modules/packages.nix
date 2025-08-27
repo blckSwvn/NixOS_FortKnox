@@ -16,7 +16,8 @@ environment.systemPackages = with pkgs; [
 	parted
 	gnumake
 	#progs
-	modrinth-app
+	#modrinth-app
+	obsidian
 	blueberry
 	librewolf
 	#etc
@@ -41,8 +42,6 @@ environment.systemPackages = with pkgs; [
 	quickemu
 	qemu_kvm
 	spice-gtk
-	virt-viewer
-	OVMF
 	virtio-win
 ] ++ (with unstablePkgs; [
 ]);
