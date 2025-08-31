@@ -16,7 +16,7 @@ environment.systemPackages = with pkgs; [
 	parted
 	gnumake
 	#progs
-	#modrinth-app
+	modrinth-app
 	obsidian
 	blueberry
 	librewolf
