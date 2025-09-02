@@ -33,6 +33,8 @@ vim.keymap.set("n", "<leader>l", "<C-W>l")
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>c", ":split<CR>")
 
+vim.keymap.set("n", "<leader>t", ":tabnew<CR>")
+
 vim.cmd("command! Gs Git status")
 vim.cmd("command! Gc Git commit")
 vim.cmd("command! Gp Git push origin main")
@@ -55,6 +57,7 @@ vim.pack.add({
 	{src = "https://github.com/tpope/vim-fugitive"},
 	{src = "https://github.com/lewis6991/gitsigns.nvim"},
 	{src = "https://github.com/leath-dub/snipe.nvim"},
+	{src = "https://github.com/rebelot/heirline.nvim"},
 })
 
 require("nvim-treesitter.configs").setup({
@@ -162,3 +165,124 @@ require("gitsigns").setup()
 local snipe = require("snipe")
 snipe.setup()
 vim.keymap.set("n", "s", snipe.open_buffer_menu)
+
+local heirline = require("heirline")
+local utils = require("heirline.utils")
+
+-- auto-grab some theme colors once
+local colors = {
+  normal = utils.get_highlight("Normal").fg,
+  status = utils.get_highlight("StatusLine").bg,
+  string = utils.get_highlight("String").fg,
+  type   = utils.get_highlight("Type").fg,
+  error  = utils.get_highlight("DiagnosticError").fg,
+  warn   = utils.get_highlight("DiagnosticWarn").fg,
+}
+require("heirline").load_colors(colors)
+
+-- mode block (short + colored)
+local ViMode = {
+  init = function(self) self.mode = vim.fn.mode(1) end,
+  static = {
+    names = { n="NORMAL", i="INSERT", v="VISUAL", V="V-LINE", ["\22"]="V-BLOCK", R="REPLACE", c="CMD", t="TERM" },
+    cols  = { n="normal", i="string", v="type", V="type", ["\22"]="type", R="error", c="warn", t="string" },
+  },
+  provider = function(self) return " " .. self.names[self.mode] .. " " end,
+  hl = function(self) return { fg="black", bg=self.cols[self.mode], bold=true } end,
+}
+
+local FileDir = {
+	provider = function()
+		local filepath = vim.api.nvim_buf_get_name(0)
+		return " " .. vim.fn.fnamemodify(filepath, ":.:h") .. "/"
+	end,
+}
+
+local FileName = { provider = " %t ", hl = { fg = "type" } }
+
+local devicons = require("nvim-web-devicons")
+
+local FileType = {
+  init = function(self)
+    self.ft = vim.bo.filetype
+    self.icon, self.icon_color = devicons.get_icon_color_by_filetype(self.ft, { default = true })
+  end,
+
+  provider = function(self)
+	  return " " ..self.icon.. " " end,
+
+  hl = function(self)
+    return { fg = self.icon_color }
+  end,
+}
+
+local Git = {
+  condition = function()
+    return vim.b.gitsigns_status_dict ~= nil
+  end,
+
+  init = function(self)
+    self.status_dict = vim.b.gitsigns_status_dict
+    self.has_changes = self.status_dict.added ~= 0
+        or self.status_dict.removed ~= 0
+        or self.status_dict.changed ~= 0
+  end,
+
+  hl = { fg = "string" },
+
+  {   -- branch name
+    provider = function(self)
+      return " " .. self.status_dict.head .. " "
+    end,
+    hl = { bold = true },
+  },
+
+  {   -- git diff status (optional)
+    provider = function(self)
+      local s = ""
+      if self.status_dict.added ~= 0 then
+        s = s .. "+" .. self.status_dict.added .. " "
+      end
+      if self.status_dict.removed ~= 0 then
+        s = s .. "-" .. self.status_dict.removed .. " "
+      end
+      if self.status_dict.changed ~= 0 then
+        s = s .. "~" .. self.status_dict.changed .. " "
+      end
+      return #s > 0 and (s .. " ") or ""
+    end,
+  },
+}
+-- right-aligned ruler
+local Ruler = {
+  provider = " %l/%L:%c %P ",
+  hl = { fg = "black", bg = "normal", bold = true },
+}
+
+local FileNameBlock = {
+    -- This component shows the filename
+    init = function(self)
+        self.filename = vim.fn.expand("%:t")
+    end,
+    provider = function(self)
+        return " " .. self.filename .. " "
+    end,
+    hl = { fg = "white", bg = "blue" },
+}
+
+-- put it together
+heirline.setup({
+  statusline = {
+	  ViMode,
+	  FileDir,
+	  FileType,
+	  FileName,
+	  { provider = "%= "},
+	  Git,
+	  { provider = "  "},
+	  Ruler,
+	},
+winbar = {
+	FileNameBlock,
+}
+})
