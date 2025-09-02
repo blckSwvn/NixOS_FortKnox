@@ -55,10 +55,11 @@ shell = pkgs.zsh;
 
 #for laptops laptop 
 services.logind.extraConfig = ''
-	handleLidSwitch=suspend;
-	HandleLidSwitchDocked=suspend;
-	IdleAction=suspend;
-	IdleActionSec=20min;
+	handleLidSwitch=suspend
+	HandleLidSwitchDocked=suspend
+	IdleAction=suspend
+	IdleActionSec=20min
+	HandlePowerKey=suspend
 '';
 
 environment.variables = {
