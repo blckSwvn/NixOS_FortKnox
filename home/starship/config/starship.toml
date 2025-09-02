@@ -1,10 +1,10 @@
 # General Settings
-format = "$nix_shell$username$hostname $directory $git_branch $git_status $cmd_duration\n$character"
+format = "$nix_shell$directory $git_branch $git_status $cmd_duration\n$character"
 add_newline = true
 
 # Prompt Symbols
 [character]
-success_symbol = "[➜](bold green)"
+success_symbol = "[>](bold green)"
 error_symbol = "[✗](bold red)"
 vicmd_symbol = "[V](bold yellow)"
 
@@ -23,14 +23,14 @@ format = "@[$hostname]($style)"
 
 # Directory
 [directory]
-truncation_length = 3
+truncation_length = 5
 truncate_to_repo = false
 style = "cyan"
 format = "[$path]($style)"
 
 # Git branch
 [git_branch]
-symbol = " "
+symbol = ""
 style = "bold purple"
 only_attached = true
 format = "[$symbol$branch]($style)"
@@ -51,8 +51,8 @@ format = "[$duration]($style)"
 disabled = true
 
 [nix_shell]
-format = "[$symbol]($style) "
-symbol = ""
+format = "[$symbol]($style)"
+symbol = " "
 style = "bold cyan"
 pure_msg = "pure"
 impure_msg = "impure"

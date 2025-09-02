@@ -20,7 +20,7 @@ boot = {
     #"exfat"
   ];
   
-  kernelPackages = unstablePkgs.linuxPackages;
+  kernelPackages = pkgs.linuxPackages_6_16;
 
   kernelModules = [
   	"kvm"
