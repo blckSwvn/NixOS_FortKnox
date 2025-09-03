@@ -136,27 +136,27 @@ cmp.setup({
 local lush = require("lush")
 
 local palette = {
-  bg        = "#000000",
+  bg        = "#000005",
   fg        = "#DADADA",
 
   -- Normal 8
   black     = "#303030",
   red       = "#DB1200",
-  green     = "#80c32B",
-  yellow    = "#e0a010",
+  green     = "#4EC24A",   -- tweaked to feel fresher & consistent
+  yellow    = "#f0bf00",
   blue      = "#4472CA",
-  magenta   = "#b85af2",  -- fixed
-  cyan      = "#3FC8B3",  -- was misnamed
+  magenta   = "#B85AF2",
+  cyan      = "#3FC8B3",
   white     = "#E0E0E0",
 
   -- Bright 8
   bright_black   = "#5C5C5C",
-  bright_red     = "#FF0A2F",
-  bright_green   = "#50c30B", -- reuse since you don’t have a lighter green
-  bright_yellow  = "#fce01F",
-  bright_blue    = "#7094D7",
-  bright_magenta = "#B5D3F8", -- shifted from "cyan-ish light" to serve as pinkish
-  bright_cyan    = "#92BEF4",
+  bright_red     = "#FF4040",  -- softened from neon pink, still strong
+  bright_green   = "#78E06B",  -- true lighter green
+  bright_yellow  = "#FFD75A",  -- brighter golden yellow
+  bright_blue    = "#6CA8FF",  -- lighter, modern blue
+  bright_magenta = "#D49BFF",  -- softer purple-pink
+  bright_cyan    = "#7FE9DB",  -- more distinct from base cyan
   bright_white   = "#FFFFFF",
 }
 
@@ -167,31 +167,38 @@ local theme = lush(function()
     Visual      { bg = palette.black },
     Comment     { fg = palette.bright_black, gui = "italic" },
 
-    Number      { fg = palette.yellow },
-
-    Type        { fg = palette.cyan },
-    Boolean     { fg = palette.cyan },
-
+    -- Language
     String      { fg = palette.green },
-
+    Number      { fg = palette.cyan },            -- cooler than yellow
+    Boolean     { fg = palette.magenta },         -- abstract concepts
+    Constant    { fg = palette.cyan },
+    Type        { fg = palette.green },
+    Keyword     { fg = palette.yellow },          -- control / definition
+    Conditional { fg = palette.yellow },          -- if/else, etc.
     Statement   { fg = palette.red, gui = "bold" },
-    Constant    { fg = palette.cyan }, --constant things
-    Keyword     { fg = palette.yellow }, --like const let static
-    Conditional { fg = palette.yellow }, --if else switch etc
-
     Function    { fg = palette.blue },
-    Identifier  { fg = palette.blue }, --Names (variables, functions, etc.).
+    Identifier  { fg = palette.blue },
 
-    Operator    { fg = palette.bright_cyan }, --math stuff like + - * =
-    PreProc     { fg = palette.bright_yellow }, --stuff like #include in C
-    Special     { fg = palette.bright_cyan }, --etc group
+    -- Operators and misc
+    Operator    { fg = palette.fg },              -- neutral, avoids rainbow
+    PreProc     { fg = palette.bright_yellow },   -- #includes, macros
+    Special     { fg = palette.bright_cyan },     -- escape chars, regex, unusual
 
-    Directory	{ fg = palette.bright_cyan },
-
+    -- UI
+    Directory   { fg = palette.blue },
     Error       { fg = palette.bright_red, gui = "bold" },
     WarningMsg  { fg = palette.bright_yellow, gui = "bold" },
     Info        { fg = palette.bright_blue },
     Todo        { fg = palette.bright_yellow, gui = "bold,italic" },
+
+CursorLine  { bg = palette.black },
+StatusLine  { fg = palette.fg, bg = palette.black },
+StatusLineNC{ fg = palette.bright_black, bg = palette.black },
+
+DiagnosticError { fg = palette.bright_red },
+DiagnosticWarn  { fg = palette.bright_yellow },
+DiagnosticInfo  { fg = palette.blue },
+DiagnosticHint  { fg = palette.cyan },
   }
 end)
 
@@ -230,7 +237,7 @@ local FileDir = {
     return " " .. vim.fn.fnamemodify(filepath, ":.:h") .. "/"
   end,
 }
-local FileName = { provider = " %t ", hl = { fg = colors.type, bg = colors.normal } }
+local FileName = { provider = " %t ", hl = { fg = palette.yellow, bg = colors.normal } }
 
 local FileType = {
   init = function(self)
