@@ -40,6 +40,7 @@ vim.cmd("command! Gs Git status")
 vim.cmd("command! Gc Git commit")
 vim.cmd("command! Gp Git push origin main")
 map("n", "<leader>Gp", ":Gitsigns preview_hunk<CR>")
+map("n", "<leader>ct", ":ColorizerToggle<CR>")
 
 -- =======================
 -- PACKS
@@ -137,22 +138,26 @@ local lush = require("lush")
 local palette = {
   bg        = "#000000",
   fg        = "#DADADA",
-  black     = "#404040",
+
+  -- Normal 8
+  black     = "#303030",
   red       = "#DB1200",
-  green     = "#3FC8B3",
-  yellow    = "#F5BC00",
-  blue      = "#4472Ca",
-  magenta   = "#16AC5A",
-  cyan      = "#92bef4",
+  green     = "#80c32B",
+  yellow    = "#e0a010",
+  blue      = "#4472CA",
+  magenta   = "#b85af2",  -- fixed
+  cyan      = "#3FC8B3",  -- was misnamed
   white     = "#E0E0E0",
+
+  -- Bright 8
   bright_black   = "#5C5C5C",
   bright_red     = "#FF0A2F",
-  bright_green   = "#26E37B",
-  bright_yellow  = "#FFCB1F",
+  bright_green   = "#50c30B", -- reuse since you don’t have a lighter green
+  bright_yellow  = "#fce01F",
   bright_blue    = "#7094D7",
-  bright_magenta = "#581EC2",
-  bright_cyan    = "#B5D3F8",
-  bright_white   = "#ffffff",
+  bright_magenta = "#B5D3F8", -- shifted from "cyan-ish light" to serve as pinkish
+  bright_cyan    = "#92BEF4",
+  bright_white   = "#FFFFFF",
 }
 
 local theme = lush(function()
@@ -161,23 +166,32 @@ local theme = lush(function()
     Cursor      { fg = palette.bg, bg = palette.fg },
     Visual      { bg = palette.black },
     Comment     { fg = palette.bright_black, gui = "italic" },
-    Constant    { fg = palette.cyan },
-    String      { fg = palette.green },
+
     Number      { fg = palette.yellow },
-    Boolean     { fg = palette.red },
-    Identifier  { fg = palette.blue },
-    Function    { fg = palette.magenta },
+
+    Type        { fg = palette.cyan },
+    Boolean     { fg = palette.cyan },
+
+    String      { fg = palette.green },
+
     Statement   { fg = palette.red, gui = "bold" },
-    Conditional { fg = palette.red },
-    Keyword     { fg = palette.cyan },
-    Operator    { fg = palette.fg },
-    Type        { fg = palette.yellow },
-    PreProc     { fg = palette.cyan },
-    Special     { fg = palette.blue },
+    Constant    { fg = palette.cyan }, --constant things
+    Keyword     { fg = palette.yellow }, --like const let static
+    Conditional { fg = palette.yellow }, --if else switch etc
+
+    Function    { fg = palette.blue },
+    Identifier  { fg = palette.blue }, --Names (variables, functions, etc.).
+
+    Operator    { fg = palette.bright_cyan }, --math stuff like + - * =
+    PreProc     { fg = palette.bright_yellow }, --stuff like #include in C
+    Special     { fg = palette.bright_cyan }, --etc group
+
+    Directory	{ fg = palette.bright_cyan },
+
     Error       { fg = palette.bright_red, gui = "bold" },
     WarningMsg  { fg = palette.bright_yellow, gui = "bold" },
     Info        { fg = palette.bright_blue },
-    Todo        { fg = palette.bright_magenta, gui = "bold,italic" },
+    Todo        { fg = palette.bright_yellow, gui = "bold,italic" },
   }
 end)
 
@@ -188,6 +202,7 @@ local heirline = require("heirline")
 local devicons = require("nvim-web-devicons")
 
 local colors = {
+  white = palette.fg,
   normal = palette.bg,
   status = palette.black,
   string = palette.green,
@@ -202,10 +217,10 @@ local ViMode = {
   init = function(self) self.mode = vim.fn.mode(1) end,
   static = {
     names = { n="NORMAL", i="INSERT", v="VISUAL", V="V-LINE", ["\22"]="V-BLOCK", R="REPLACE", c="CMD", t="TERM" },
-    cols  = { n="normal", i="string", v="type", V="type", ["\22"]="type", R="error", c="warn", t="string" },
+    cols  = { n="white", i="string", v="type", V="type", ["\22"]="type", R="error", c="warn", t="string" },
   },
   provider = function(self) return " " .. self.names[self.mode] .. " " end,
-  hl = function(self) return { fg="#ffffff", bg=colors[self.cols[self.mode]], bold=true } end,
+  hl = function(self) return { fg=colors.normal, bg=colors[self.cols[self.mode]], bold=true } end,
 }
 
 -- File info
@@ -270,6 +285,7 @@ heirline.setup({
     Ruler,
   },
   winbar = nil,
+  --Tabline =
 })
 
 lush(theme)
