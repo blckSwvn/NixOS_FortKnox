@@ -6,7 +6,7 @@ add_newline = true
 [character]
 success_symbol = "[>](bold green)"
 error_symbol = "[✗](bold red)"
-vicmd_symbol = "[V](bold yellow)"
+vicmd_symbol = "[Vi](bold yellow)"
 
 # Username module
 [username]
