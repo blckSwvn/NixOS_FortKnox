@@ -1,7 +1,3 @@
--- =======================
--- Neovim Init.lua
--- =======================
-
 -- OPTIONS
 vim.o.winbar = nil
 vim.o.termguicolors = true
@@ -41,6 +37,7 @@ vim.cmd("command! Gc Git commit")
 vim.cmd("command! Gp Git push origin main")
 map("n", "<leader>Gp", ":Gitsigns preview_hunk<CR>")
 map("n", "<leader>ct", ":ColorizerToggle<CR>")
+map("t", "<C-Space>", [[<C-\><C-n>]])
 
 -- =======================
 -- PACKS
@@ -248,6 +245,47 @@ local FileType = {
   hl = function(self) return { fg = self.icon_color, bg = colors.normal } end,
 }
 
+local function get_ahead_behind()
+  local git_dir = vim.fn.finddir(".git", ".;")
+  if git_dir == "" then
+    return ""
+  end
+
+  -- Get upstream info
+  local upstream = vim.fn.systemlist("git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null")[1]
+  if not upstream or upstream == "" then
+    return ""
+  end
+
+  local counts = vim.fn.systemlist(
+    "git rev-list --left-right --count HEAD..." .. upstream .. " 2>/dev/null"
+  )[1]
+
+  if not counts or counts == "" then
+    return ""
+  end
+
+  local ahead, behind = counts:match("(%d+)%s+(%d+)")
+  ahead, behind = tonumber(ahead), tonumber(behind)
+
+  local result = {}
+  if ahead > 0 then
+    table.insert(result, "↑" .. ahead)
+  end
+  if behind > 0 then
+    table.insert(result, "↓" .. behind)
+  end
+
+  return #result > 0 and table.concat(result, " ") or ""
+end
+
+local GitAheadBehind = {
+  provider = function()
+    return get_ahead_behind()
+  end,
+  hl = { fg = palette.cyan }, -- tweak highlight group
+}
+
 -- Git info
 local Git = {
   condition = function() return vim.b.gitsigns_status_dict ~= nil end,
@@ -259,7 +297,7 @@ local Git = {
   end,
   hl = { fg = colors.string, bg = colors.normal },
   {
-    provider = function(self) return " " .. self.status_dict.head .. " " end,
+    provider = function(self) return "" .. self.status_dict.head .. " " end,
     hl = { bold = true }
   },
   {
@@ -288,6 +326,7 @@ heirline.setup({
     FileName,
     { provider = "%= "},
     Git,
+    GitAheadBehind,
     { provider = "  "},
     Ruler,
   },
