@@ -1,57 +1,59 @@
-// -*- mode: jsonc -*-
+// ~/.config/waybar/config
 {
-"layer": "top",
-"position": "bottom",
-"height": 25,
-"spacing": 5, 
+  "layer": "top",
+  "position": "bottom",
+  "height": 5,
+  "spacing": 0,
 
-"modules-left": ["clock", "pulseaudio"],
-"modules-center": ["river/tags"],
-"modules-right": ["network", "battery"],
+  "modules-left": ["clock", "pulseaudio"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["network", "battery"],
 
-"clock": {
-  "format": " {:%H:%M}",
-  "tooltip-format": "{:%A, %d %B %Y}\n{:%H:%M:%S}", 
-  "format-alt": " {:%a, %d. %b}"
-},
-
-"custom/playerctl": {
- "output": "sh -c 'playerctl metadata --format \"{{ artist }} - {{ title }}\" || echo No music'",
-  "interval": 5,
-  "format": " {output}",
-  "tooltip": false
-},
-
-"pulseaudio": {
-  "format": "  {volume}%", 
-  "format-muted": " Muted"
-},
-
-"river/tags": {
-  "num-tags": 10,
-  "tag-labels": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  "disable-click": true,
-  "expand": false
-},
-
-"network": {
-  "format-wifi": "  {essid}",
-  "format-ethernet": "{ipaddr}/{cidr} ",
-  "tooltip-format": "{essid} ({signalStrength}%) ",
-  "format-linked": "{ifname} (No IP) ",
-  "format-disconnected": "Disconnected ⚠"
-},
-
-"battery": {
-  "states": {
-    "warning": 30,
-    "critical": 15
+  "clock": {
+    "format": " {:%H:%M}",
+    "tooltip-format": "{:%A, %d %B %Y}\n{:%H:%M:%S}",
+    "format-alt": " {:%a, %d %b}"
   },
-  "format": "{capacity}% {icon}",
-  "format-full": "{capacity}% {icon}",
-  "format-charging": "{capacity}% ",
-  "format-plugged": "{capacity}% ",
-  "format-alt": "{time} {icon}",
-  "format-icons": ["", "", "", "", ""]
-},
+
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": " Muted"
+  },
+
+"hyprland/workspaces": {
+	"format": "{icon}",
+	"format-icons": {
+		"1": "",
+		"2": "",
+		"3": "3",
+		"4": "4",
+		"5": "5",
+		"active": "",
+		"default": ""
+	},
+	"persistent-workspaces": {
+		"*": [ 1,2,3,4,5 ]
+	}
+  },
+
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "{ifname} {ipaddr} ",
+    "tooltip-format": "{essid} ({signalStrength}%) ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "⚠ Disconnected"
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% ",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["", "", "", "", ""]
+  }
 }

@@ -24,6 +24,7 @@
 #etc
       tldr
 #DE
+      xwayland
       swaybg
       wofi
       playerctl
