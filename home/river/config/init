@@ -14,7 +14,7 @@ waybar &
 
 #startup
 tileInit() {
-swaybg -i /home/blckSwan/Pictures/wallpaper.jpg &
+swaybg -i /home/blckSwan/Pictures/wallpaper.png &
 rivercarro &
 riverctl default-layout rivercarro
 riverctl send-layout-cmd rivercarro "main-count 1"
@@ -51,6 +51,7 @@ riverctl map normal $mod2 Space spawn kitty
 riverctl map normal $mod2 b spawn librewolf
 riverctl map normal $mod2 f toggle-fullscreen
 riverctl map normal $mod Q close
+#riverctl map normal $mod2 g spawn "grim -g "$(slurp)""
 riverctl map normal $mod Space spawn "wofi --show drun"
 #riverctl map normal $mod+Shift E exit
 riverctl map normal $mod f toggle-float
