@@ -14,6 +14,8 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.opt.clipboard = "unnamedplus"
 
+vim.cmd('filetype plugin indent on')
+
 -- LEADER
 vim.g.mapleader = " "
 
@@ -54,12 +56,10 @@ vim.pack.add({
   {src = "https://github.com/lewis6991/gitsigns.nvim"},
   {src = "https://github.com/leath-dub/snipe.nvim"},
   {src = "https://github.com/rebelot/heirline.nvim"},
-  {src = "https://github.com/vimplug/nvim-colorizer.lua"},
   {src = "https://github.com/rktjmp/lush.nvim"},
 })
 
 -- PLUGIN CONFIGS
-require("colorizer").setup()
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = {"c", "lua", "nix"},
@@ -327,38 +327,3 @@ lush(theme)
 vim.api.nvim_set_hl(0, "StatusLine",   { fg = palette.fg, bg = palette.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusLineNC", { fg = palette.fg, bg = palette.bg })
 vim.api.nvim_set_hl(0, "VertSplit",    { fg = palette.black, bg = palette.bg })
-
--- Create an augroup for indentation settings
-vim.api.nvim_create_augroup("Indentation", { clear = true })
-
--- Lua: 2 spaces, expandtab
-vim.api.nvim_create_autocmd("FileType", {
-  group = "Indentation",
-  pattern = "lua",
-  callback = function()
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.tabstop = 2
-    vim.opt_local.expandtab = true
-  end,
-})
-
--- C (Linux kernel style): tabs, width 8
-vim.api.nvim_create_autocmd("FileType", {
-  group = "Indentation",
-  pattern = "c",
-  callback = function()
-    vim.opt_local.shiftwidth = 8
-    vim.opt_local.tabstop = 8
-    vim.opt_local.expandtab = false
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  group = "Indentation",
-  pattern = "nix",
-  callback = function()
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.tabstop = 2
-    vim.opt_local.expandtab = true
-  end,
-})
