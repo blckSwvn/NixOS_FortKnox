@@ -8,7 +8,7 @@
         efiSupport = true;
         device = "nodev";
 #useOSProber = true if you use multable oses
-        useOSProber = false;
+        useOSProber = true;
       };
       efi.canTouchEfiVariables = true;
     };
