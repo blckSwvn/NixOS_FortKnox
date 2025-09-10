@@ -57,6 +57,7 @@ vim.pack.add({
 	{src = "https://github.com/leath-dub/snipe.nvim"},
 	{src = "https://github.com/rebelot/heirline.nvim"},
 	{src = "https://github.com/rktjmp/lush.nvim"},
+	{src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"},
 })
 
 -- PLUGIN CONFIGS

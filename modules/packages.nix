@@ -21,6 +21,7 @@
       obsidian
       blueberry
       librewolf
+      mullvad-browser
 #etc
       tldr
 #DE
