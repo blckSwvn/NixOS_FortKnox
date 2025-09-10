@@ -1,59 +1,78 @@
-// ~/.config/waybar/config
 {
-  "layer": "top",
-  "position": "bottom",
-  "height": 5,
-  "spacing": 0,
+	"layer": "top",
+	"position": "bottom",
+	"reload_style_on_change": true,
+	"modules-left": ["clock", "pulseaudio"],
+	"modules-center": ["hyprland/workspaces"],
+	"modules-right": ["bluetooth","network","battery"],
 
-  "modules-left": ["clock", "pulseaudio"],
-  "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["network", "battery"],
 
-  "clock": {
-    "format": " {:%H:%M}",
-    "tooltip-format": "{:%A, %d %B %Y}\n{:%H:%M:%S}",
-    "format-alt": " {:%a, %d %b}"
-  },
-
-  "pulseaudio": {
-    "format": "  {volume}%",
-    "format-muted": " Muted"
-  },
-
-"hyprland/workspaces": {
-	"format": "{icon}",
-	"format-icons": {
-		"1": "",
-		"2": "",
-		"3": "3",
-		"4": "4",
-		"5": "5",
-		"active": "",
-		"default": ""
+	"pulseaudio": {
+		"format": "  {volume}%",
+		"format-muted": " Muted"
 	},
-	"persistent-workspaces": {
-		"*": [ 1,2,3,4,5 ]
+
+	"hyprland/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"active": "",
+			"default": "",
+			"empty": ""
+		},
+		"persistent-workspaces": {
+			"*": [ 1,2,3,4,5 ]
+		}
+	},
+
+	"clock": {
+		"format": " {:%H:%M} ",
+		"interval": 1,   
+		"tooltip-format": "<tt>{calendar}</tt>",
+		"calendar": {
+			"format": {
+				"today": "<span color='#fAfBfC'><b>{}</b></span>"
+			}
+		}
+	},
+	"network": {
+		"format-wifi": "   {essid}",
+		"format-ethernet":" {ifname}",
+		"format-disconnected": "",
+		"tooltip-format-disconnected": "Error",
+		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+		"tooltip-format-ethernet": "{ifname} 🖧 "
+	},
+	"bluetooth": {
+		"format-on": "󰂯",
+		"format-off": "󰂲",
+		"format-disabled": "󰂲",
+		"format-connected-battery": "{device_battery_percentage}% 󰂯",
+		"format-alt": "{device_alias} 󰂯",
+		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
+		"on-click-right": "blueman-manager"
+	},
+	"battery": {
+		"interval":30,
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 20
+		},
+		"format": "{capacity}% {icon}",
+		"format-charging": "{capacity}% 󰂄",
+		"format-plugged": "{capacity}% 󰂄 ",
+		"format-alt": "{time} {icon}",
+		"format-icons": [
+			"󰁻",
+			"󰁼",
+			"󰁾",
+			"󰂀",
+			"󰂂",
+			"󰁹"
+		]
 	}
-  },
-
-  "network": {
-    "format-wifi": "  {essid}",
-    "format-ethernet": "{ifname} {ipaddr} ",
-    "tooltip-format": "{essid} ({signalStrength}%) ",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "⚠ Disconnected"
-  },
-
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{capacity}% {icon}",
-    "format-full": "{capacity}% ",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
-    "format-alt": "{time} {icon}",
-    "format-icons": ["", "", "", "", ""]
-  }
+}
 }
