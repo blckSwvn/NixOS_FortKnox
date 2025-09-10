@@ -22,6 +22,7 @@ vim.g.mapleader = " "
 -- KEYBINDINGS
 local map = vim.keymap.set
 map("n", "<leader>g", ":FzfLua grep<CR>")
+map("n", "<leader>f", ":FzfLua files<CR>")
 map("n", "<leader>z", ":FzfLua <CR>")
 map("n", "<leader>o", ":lua MiniFiles.open()<CR>")
 map("n", "<leader>w", ":w<CR>")
