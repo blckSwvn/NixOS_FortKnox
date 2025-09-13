@@ -1,7 +1,6 @@
 -- OPTIONS
-vim.o.winbar = nil
+vim.o.winbar = ""
 vim.o.termguicolors = true
-vim.loader.enable()
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.cursorline = true
@@ -24,7 +23,7 @@ local map = vim.keymap.set
 map("n", "<leader>g", ":FzfLua grep<CR>")
 map("n", "<leader>f", ":FzfLua files<CR>")
 map("n", "<leader>z", ":FzfLua <CR>")
-map("n", "<leader>o", ":lua MiniFiles.open()<CR>")
+map("n", "<leader>-", ":Oil <CR>")
 map("n", "<leader>w", ":w<CR>")
 map("n", "<leader>q", ":q!<CR>")
 map("n", "<leader>x", ":x<CR>")
@@ -38,13 +37,12 @@ map("n", "<leader>t", ":tabnew<CR>")
 vim.cmd("command! Gs Git status")
 vim.cmd("command! Gc Git commit")
 vim.cmd("command! Gp Git push origin main")
-map("n", "<leader>Gp", ":Gitsigns preview_hunk<CR>")
-map("n", "<leader>ct", ":ColorizerToggle<CR>")
 map("t", "<C-Space>", [[<C-\><C-n>]])
 
 -- PACKS
 vim.pack.add({
 	{src = "https://github.com/nvim-treesitter/nvim-treesitter"},
+	{src = "https://github.com/stevearc/oil.nvim"},
 	{src = "https://github.com/windwp/nvim-autopairs"},
 	{src = "https://github.com/ibhagwan/fzf-lua"},
 	{src = "https://github.com/nvim-tree/nvim-web-devicons"},
@@ -52,7 +50,6 @@ vim.pack.add({
 	{src = "https://github.com/hrsh7th/nvim-cmp"},
 	{src = "https://github.com/hrsh7th/cmp-nvim-lsp"},
 	{src = "https://github.com/neovim/nvim-lspconfig"},
-	{src = "https://github.com/echasnovski/mini.nvim"},
 	{src = "https://github.com/tpope/vim-fugitive"},
 	{src = "https://github.com/lewis6991/gitsigns.nvim"},
 	{src = "https://github.com/leath-dub/snipe.nvim"},
@@ -62,6 +59,22 @@ vim.pack.add({
 })
 
 -- PLUGIN CONFIGS
+require("oil").setup()
+
+require'nvim-treesitter.configs'.setup {
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+  },
+}
 
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {"c", "lua", "nix"},
@@ -70,11 +83,6 @@ require("nvim-treesitter.configs").setup({
 
 require("nvim-autopairs").setup()
 require("ibl").setup({ scope = { enabled = true } })
-
-require("mini.files").setup({
-	mappings = { synchronize = "W" },
-	options = { permanent_delete = true, use_as_default_explorer = true }
-})
 
 require("gitsigns").setup()
 require("snipe").setup()
@@ -191,141 +199,21 @@ local theme = lush(function()
 	}
 end)
 
--- HEIRLINE STATUSBAR
-local heirline = require("heirline")
-local devicons = require("nvim-web-devicons")
-
-local colors = {
-	white = palette.fg,
-	normal = palette.bg,
-	status = palette.black,
-	string = palette.green,
-	type   = palette.yellow,
-	error  = palette.red,
-	warn   = palette.bright_yellow,
-}
-heirline.load_colors(colors)
-
--- ViMode block
-local ViMode = {
-	init = function(self) self.mode = vim.fn.mode(1) end,
-	static = {
-		names = { n="NORMAL", i="INSERT", v="VISUAL", V="V-LINE", ["\22"]="V-BLOCK", R="REPLACE", c="CMD", t="TERM" },
-		cols  = { n="white", i="string", v="type", V="type", ["\22"]="type", R="error", c="warn", t="string" },
-	},
-	provider = function(self) return " " .. self.names[self.mode] .. " " end,
-	hl = function(self) return { fg=colors.normal, bg=colors[self.cols[self.mode]], bold=true } end,
-}
-
--- File info
-local FileDir = {
-	provider = function()
-		local filepath = vim.api.nvim_buf_get_name(0)
-		return " " .. vim.fn.fnamemodify(filepath, ":.:h") .. "/"
-	end,
-}
-local FileName = { provider = " %t ", hl = { fg = palette.yellow, bg = colors.normal } }
-
-local FileType = {
-	init = function(self)
-		self.ft = vim.bo.filetype
-		self.icon, self.icon_color = devicons.get_icon_color_by_filetype(self.ft, { default = true })
-	end,
-	provider = function(self) return " " .. self.icon .. " " end,
-	hl = function(self) return { fg = self.icon_color, bg = colors.normal } end,
-}
-
-local function get_ahead_behind()
-	local git_dir = vim.fn.finddir(".git", ".;")
-	if git_dir == "" then
-		return ""
-	end
-
-	-- Get upstream info
-	local upstream = vim.fn.systemlist("git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null")[1]
-	if not upstream or upstream == "" then
-		return ""
-	end
-
-	local counts = vim.fn.systemlist(
-		"git rev-list --left-right --count HEAD..." .. upstream .. " 2>/dev/null"
-	)[1]
-
-	if not counts or counts == "" then
-		return ""
-	end
-
-	local ahead, behind = counts:match("(%d+)%s+(%d+)")
-	ahead, behind = tonumber(ahead), tonumber(behind)
-
-	local result = {}
-	if ahead > 0 then
-		table.insert(result, "↑" .. ahead)
-	end
-	if behind > 0 then
-		table.insert(result, "↓" .. behind)
-	end
-
-	return #result > 0 and table.concat(result, " ") or ""
-end
-
-local GitAheadBehind = {
-	provider = function()
-		return get_ahead_behind()
-	end,
-	hl = { fg = palette.cyan }, -- tweak highlight group
-}
-
--- Git info
-local Git = {
-	condition = function() return vim.b.gitsigns_status_dict ~= nil end,
-	init = function(self)
-		self.status_dict = vim.b.gitsigns_status_dict
-		self.has_changes = self.status_dict.added ~= 0
-		or self.status_dict.removed ~= 0
-		or self.status_dict.changed ~= 0
-	end,
-	hl = { fg = colors.string, bg = colors.normal },
-	{
-		provider = function(self) return "" .. self.status_dict.head .. " " end,
-		hl = { bold = true }
-	},
-	{
-		provider = function(self)
-			local s = ""
-			if self.status_dict.added ~= 0 then s = s .. "+" .. self.status_dict.added .. " " end
-			if self.status_dict.removed ~= 0 then s = s .. "-" .. self.status_dict.removed .. " " end
-			if self.status_dict.changed ~= 0 then s = s .. "~" .. self.status_dict.changed .. " " end
-			return #s > 0 and (s .. " ") or ""
-		end,
-	},
-}
-
--- Right-aligned Ruler
-local Ruler = {
-	provider = " %l/%L:%c %P ",
-	hl = { fg = "#ffffff", bg = colors.normal, bold = true }
-}
-
--- Put it together
-heirline.setup({
-	statusline = {
-		ViMode,
-		FileDir,
-		FileType,
-		FileName,
-		{ provider = "%= "},
-		Git,
-		GitAheadBehind,
-		{ provider = "  "},
-		Ruler,
-	},
-	winbar = nil,
-	--Tabline =
-})
-
 lush(theme)
 
+vim.o.laststatus = 2
+
+vim.o.statusline = "%f %m %= %{v:lua.GitStatus()}  %l/%L:%c"
+
+_G.GitStatus = function()
+    local gsd = vim.b.gitsigns_status_dict
+    if not gsd then return "" end
+    local s = "" .. gsd.head
+    if gsd.added ~= 0 then s = s .. " +" .. gsd.added end
+    if gsd.removed ~= 0 then s = s .. " -" .. gsd.removed end
+    if gsd.changed ~= 0 then s = s .. " ~" .. gsd.changed end
+    return s
+end
 vim.api.nvim_set_hl(0, "StatusLine",   { fg = palette.fg, bg = palette.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusLineNC", { fg = palette.fg, bg = palette.bg })
 vim.api.nvim_set_hl(0, "VertSplit",    { fg = palette.black, bg = palette.bg })
