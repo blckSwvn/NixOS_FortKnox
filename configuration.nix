@@ -52,6 +52,23 @@
     shell = pkgs.zsh;
   };
 
+#disable usb from waking
+systemd.services.disable-usb-wake = {
+  description = "Disable all USB wakeup devices";
+  after = [ "multi-user.target" ];
+  serviceConfig = {
+    Type = "oneshot";
+    ExecStart = ''
+      for dev in $(grep -i usb /proc/acpi/wakeup | awk '{print $1}'); do
+        echo $dev > /proc/acpi/wakeup
+      done
+    '';
+    RemainAfterExit = true;
+  };
+};
+
+boot.kernelParams = [ "mem_sleep_default=deep" ];
+
 #for laptops laptop 
   services.logind.extraConfig = ''
     handleLidSwitch=suspend
