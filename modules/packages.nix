@@ -3,7 +3,7 @@
 #packages
   environment.systemPackages = with pkgs; [
 #term
-    starship
+      starship
       quickemu
       bash
       wineWowPackages.full
@@ -36,7 +36,9 @@
       fastfetch
       nitch
 #langs/lsps
+      vscode-langservers-extracted
       nixd
+      nix-init
       clang-tools
       lua-language-server
       gcc

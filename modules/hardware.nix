@@ -13,14 +13,14 @@
 #bloat
   services = {
     printing.enable = false;
-    nscd.enable = lib.mkForce false;
+    nscd.enable = false;
     avahi.enable = false;
     dbus.enable = true;
     xserver.enable = false;
   };
   system.nssModules = lib.mkForce [];
   systemd.oomd.enable = false;
-  security.polkit.enable = lib.mkForce false;
+  security.polkit.enable = true;
 
 
   hardware.bluetooth = {

@@ -2,7 +2,7 @@
 	"layer": "top",
 	"position": "bottom",
 	"reload_style_on_change": true,
-	"modules-left": ["clock", "pulseaudio"],
+	"modules-left": ["clock", "pulseaudio", "mpris"],
 	"modules-center": ["hyprland/workspaces"],
 	"modules-right": ["bluetooth","network","battery"],
 
@@ -10,6 +10,17 @@
 	"pulseaudio": {
 		"format": "  {volume}%",
 		"format-muted": " Muted"
+	},
+
+	"mpris": {
+		"format": "{player-icon} {tittle} {artist}",
+		"format-paused": "{player_icon} {tittle} {artist}",
+		"player-icons": {
+			"default": "▶ "
+		},
+		"status-icon": {
+			"paused": "󰏤 "
+		}
 	},
 
 	"hyprland/workspaces": {

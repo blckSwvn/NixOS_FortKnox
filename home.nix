@@ -1,13 +1,14 @@
 { config, pkgs, unstablePkgs, ... } : {
 
   imports = [
-    ./home/nvim/nvim.nix
+      ./home/nvim/nvim.nix
       ./home/kitty/kitty.nix
       ./home/wofi/wofi.nix
       ./home/waybar/waybar.nix
       ./home/starship/starship.nix
       ./home/river/river.nix
       ./home/hyprland/hyprland.nix
+      ./home/cmus/cmus.nix
   ];
 
   home.username = "blckSwan";

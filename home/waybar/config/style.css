@@ -1,126 +1,132 @@
 * {
-    font-size:13px;
-    font-family: "JetBrainsMono Nerd Font", monospace;
+	font-size:13px;
+	font-family: "JetBrainsMono Nerd Font", monospace;
 }
 window#waybar{
-    all:unset;
+	all:unset;
 }
 .modules-left {
-    padding:5px 5px;
-    margin: 2 5;
-    border-radius:10px;
-    background: alpha(#000000,.6);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+	padding:5px 5px;
+	margin: 2 5;
+	border-radius:10px;
+	background: alpha(#000000,.6);
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 .modules-center {
-    padding:5px 5px;
-    margin: 2 5;
-    border-radius:10px;
-    background: alpha(#000000,.6);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+	padding:5px 5px;
+	margin: 2 5;
+	border-radius:10px;
+	background: alpha(#000000,.6);
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 .modules-right {
-    padding:5px 5px;
-    margin: 2 5;
-    border-radius:10px;
-    background: alpha(#000000,.6);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+	padding:5px 5px;
+	margin: 2 5;
+	border-radius:10px;
+	background: alpha(#000000,.6);
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 tooltip {
-    background:#000000;
-    color: @color7;
+	background:#000000;
+	color: #ffffff;
 }
-#clock:hover, #bluetooth:hover,#network:hover,#battery:hover {
-    transition: all .3s ease;
-    color:#ffffff;
+#clock:hover, #bluetooth:hover,#network:hover,#battery:hover #mpris:hover {
+	transition: all .3s ease;
+	color:#ffffff;
 }
 
 #clock{
-    padding: 0px 5px;
-    color:#ffffff;
-    transition: all .3s ease;
+	padding: 0px 5px;
+	color:#ffffff;
+	transition: all .3s ease;
+}
+
+#mpris{
+	padding: 0px 5px;
+	color:#ffffff;
+	transition: all .3s ease;
 }
 
 #workspaces {
-    padding: 0px 5px;
+	padding: 0px 5px;
 }
 #workspaces button {
-    all:unset;
-    padding: 0px 5px;
-    color: alpha(#a8bAf2,.6);
-    transition: all .2s ease;
+	all:unset;
+	padding: 0px 5px;
+	color: alpha(#a8bAf2,.6);
+	transition: all .2s ease;
 }
 #workspaces button:hover {
-    color:rgba(0,0,0,0);
-    border: none;
-    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
-    transition: all 1s ease;
+	color:rgba(0,0,0,0);
+	border: none;
+	text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+	transition: all 1s ease;
 }
 #workspaces button.active {
-    color: #a8bAf2;
-    border: none;
-    text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+	color: #a8bAf2;
+	border: none;
+	text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
 }
 #workspaces button.empty {
-    color: rgba(0,0,0,0);
-    border: none;
-    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
+	color: rgba(0,0,0,0);
+	border: none;
+	text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
 }
 #workspaces button.empty:hover {
-    color: rgba(0,0,0,0);
-    border: none;
-    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
-    transition: all 1s ease;
+	color: rgba(0,0,0,0);
+	border: none;
+	text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+	transition: all 1s ease;
 }
 #workspaces button.empty.active {
-    color: #a8bAf2;
-    border: none;
-    text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+	color: #a8bAf2;
+	border: none;
+	text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
 }
 #bluetooth{
-    padding: 0px 5px;
-    transition: all .3s ease;
-    color:#ffffff;
+	padding: 0px 5px;
+	transition: all .3s ease;
+	color:#ffffff;
 
 }
 #network{
-    padding: 0px 5px;
-    transition: all .3s ease;
-    color:#ffffff;
+	padding: 0px 5px;
+	transition: all .3s ease;
+	color:#ffffff;
 
 }
 #battery{
-    padding: 0px 5px;
-    transition: all .3s ease;
-    color:#ffffff;
+	padding: 0px 5px;
+	transition: all .3s ease;
+	color:#ffffff;
 }
 #battery.charging {
-    color: #26A65B;
+	color: #26A65B;
 }
 
 #battery.warning:not(.charging) {
-    color: #ffbe61;
+	color: #ffbe61;
 }
 
 #battery.critical:not(.charging) {
-    color: #f53c3c;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+	color: #f53c3c;
+	animation-name: blink;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
 }
 #tray{
-    padding: 0px 5px;
-    transition: all .3s ease; 
+	padding: 0px 5px;
+	transition: all .3s ease; 
 
 }
 #tray menu * {
-    padding: 0px 5px;
-    transition: all .3s ease; 
+	padding: 0px 5px;
+	transition: all .3s ease; 
 }
 
 #tray menu separator {
-    padding: 0px 5px;
-    transition: all .3s ease; 
+	padding: 0px 5px;
+	transition: all .3s ease; 
 }
