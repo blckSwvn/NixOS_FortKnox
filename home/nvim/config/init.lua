@@ -47,7 +47,6 @@ vim.pack.add({
 	{src = "https://github.com/windwp/nvim-autopairs"},
 	{src = "https://github.com/ibhagwan/fzf-lua"},
 	{src = "https://github.com/nvim-tree/nvim-web-devicons"},
-	--{src = "https://github.com/lukas-reineke/indent-blankline.nvim"},
 	{src = "https://github.com/hrsh7th/nvim-cmp"},
 	{src = "https://github.com/hrsh7th/cmp-nvim-lsp"},
 	{src = "https://github.com/neovim/nvim-lspconfig"},
@@ -83,7 +82,6 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("nvim-autopairs").setup()
---require("ibl").setup({ scope = { enabled = true } })
 
 require("gitsigns").setup()
 require("snipe").setup()
