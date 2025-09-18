@@ -217,3 +217,4 @@ end
 vim.api.nvim_set_hl(0, "StatusLine",   { fg = palette.fg, bg = palette.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusLineNC", { fg = palette.fg, bg = palette.bg })
 vim.api.nvim_set_hl(0, "VertSplit",    { fg = palette.black, bg = palette.bg })
+
