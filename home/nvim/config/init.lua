@@ -54,7 +54,6 @@ vim.pack.add({
 	{src = "https://github.com/tpope/vim-fugitive"},
 	{src = "https://github.com/lewis6991/gitsigns.nvim"},
 	{src = "https://github.com/leath-dub/snipe.nvim"},
-	{src = "https://github.com/rebelot/heirline.nvim"},
 	{src = "https://github.com/rktjmp/lush.nvim"},
 	{src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"},
 })
