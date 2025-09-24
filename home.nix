@@ -8,7 +8,6 @@
       ./home/starship/starship.nix
       ./home/river/river.nix
       ./home/hyprland/hyprland.nix
-      ./home/cmus/cmus.nix
   ];
 
   home.username = "blckSwan";

@@ -21,9 +21,10 @@
       obsidian
       blueberry
       librewolf
-      mullvad-browser
 #etc
       tldr
+      man-pages
+      man-pages-posix
 #DE
       xwayland
       swaybg

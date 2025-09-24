@@ -1,5 +1,6 @@
 -- OPTIONS
 vim.o.termguicolors = true
+vim.o.ignorecase = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.cursorline = true
@@ -59,7 +60,20 @@ vim.pack.add({
 })
 
 -- PLUGIN CONFIGS
-require("oil").setup()
+require("oil").setup({
+	columns = {
+		"mtime",
+		"icon",
+	},
+	view_options = {
+		show_hidden = true,
+		sort = {
+			{ "mtime", "desc" },
+			{ "name", "asc" },
+		},
+	},
+	watch_for_changes = true,
+})
 
 require'nvim-treesitter.configs'.setup {
   textobjects = {
