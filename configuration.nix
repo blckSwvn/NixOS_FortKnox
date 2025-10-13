@@ -72,7 +72,7 @@
 #for laptops laptop 
   services.logind.extraConfig = ''
     handleLidSwitch=suspend
-    HandleLidSwitchDocked=suspend
+    HandleLidSwitchDocked=ignore
     IdleAction=suspend
     IdleActionSec=20min
     HandlePowerKey=suspend

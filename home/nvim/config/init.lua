@@ -214,19 +214,6 @@ end)
 
 lush(theme)
 
-vim.o.laststatus = 2
-
-vim.o.statusline = "%f %m %= %{v:lua.GitStatus()}  %l/%L:%c"
-
-_G.GitStatus = function()
-    local gsd = vim.b.gitsigns_status_dict
-    if not gsd then return "" end
-    local s = "" .. gsd.head
-    if gsd.added ~= 0 then s = s .. " +" .. gsd.added end
-    if gsd.removed ~= 0 then s = s .. " -" .. gsd.removed end
-    if gsd.changed ~= 0 then s = s .. " ~" .. gsd.changed end
-    return s
-end
 vim.api.nvim_set_hl(0, "StatusLine",   { fg = palette.fg, bg = palette.bg, bold = true })
 vim.api.nvim_set_hl(0, "StatusLineNC", { fg = palette.fg, bg = palette.bg })
 vim.api.nvim_set_hl(0, "VertSplit",    { fg = palette.black, bg = palette.bg })
