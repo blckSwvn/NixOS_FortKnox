@@ -9,19 +9,20 @@ systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESS
 systemctl --user start xdg-desktop-portal-wlr.service &
 systemctl --user start xdg-desktop-portal.service &
 
+swaybg -i /home/blckSwan/Pictures/wallpaper.png &
+
 sleep 1
 waybar &
 
 #startup
 tileInit() {
-swaybg -i /home/blckSwan/Pictures/wallpaper.png &
 rivercarro &
 riverctl default-layout rivercarro
 riverctl send-layout-cmd rivercarro "main-count 1"
 riverctl send-layout-cmd rivercarro "main-ratio 0.5"
-riverctl send-layout-cmd rivercarro "gaps 10"
-riverctl send-layout-cmd rivercarro "inner-gaps 10"
-riverctl send-layout-cmd rivercarro "outer-gaps 0"
+# riverctl send-layout-cmd rivercarro "gaps 10"
+riverctl send-layout-cmd rivercarro "inner-gaps 5"
+riverctl send-layout-cmd rivercarro "outer-gaps 5"
 riverctl send-layout-cmd rivercarro "width-ratio 1"
 riverctl send-layout-cmd rivercarro "no-smart-gaps"
 riverctl send-layout-cmd rivercarro "no-smart-gaps"
@@ -47,13 +48,15 @@ riverctl rule-add -app-id librewolf tags 4
 
 #map aka binds
 #common lanching apps etc
+riverctl map normal $mod s spawn "systemctl suspend && hyprlock"
+riverctl map normal $mod+Shift s spawn "systemctl suspend"
 riverctl map normal $mod2 Space spawn kitty
 riverctl map normal $mod2 b spawn librewolf
 riverctl map normal $mod2 f toggle-fullscreen
 riverctl map normal $mod Q close
-#riverctl map normal $mod2 g spawn "grim -g "$(slurp)""
+# riverctl map normal $mod2 g spawn "(grim -g "$(slurp)")"
 riverctl map normal $mod Space spawn "wofi --show drun"
-#riverctl map normal $mod+Shift E exit
+riverctl map normal $mod+Shift E exit
 riverctl map normal $mod f toggle-float
 riverctl map normal $mod3+Shift s spawn "DRI_PRIME=0 steam"
 
