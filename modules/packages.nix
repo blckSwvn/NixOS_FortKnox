@@ -6,9 +6,7 @@
       starship
       quickemu
       bash
-      wineWowPackages.full
       bat
-      brightnessctl
       git
       btop
       fzf
@@ -18,10 +16,12 @@
       gnumake
 #progs
       # modrinth-app
+      wineWowPackages.full
       obsidian
-      blueberry
       librewolf
 #etc
+      torsocks
+      brightnessctl
       tldr
       man-pages
       man-pages-posix
@@ -33,15 +33,10 @@
       wl-clipboard
       grim
       slurp
-#bloat
-      fastfetch
-      nitch
 #langs/lsps
       vscode-langservers-extracted
-      nixd
       nix-init
       clang-tools
-      lua-language-server
       gcc
 #VMs
       qemu

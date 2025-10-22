@@ -16,8 +16,8 @@
     blacklistedKernelModules = [ "nouveau" ];
 
     supportedFilesystems = [
-      "ntfs"
-#"exfat"
+# "ntfs"
+# "exfat"
     ];
 
     kernelPackages = pkgs.linuxPackages_6_16;

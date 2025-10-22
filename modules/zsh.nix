@@ -21,15 +21,13 @@
     shellAliases = {
       ".." = "cd ..";
       "~" = "cd ~";
-      nixshell = "nix-shell --run zsh";
+      ns = "export NIXPKGS_ALLOW_UNFREE=1 && nix-shell --run zsh";
       v = "nvim";
       vf = "nvimf";
       rebuild = "doas env GIT_ALLOW_ROOT=1 nixos-rebuild switch --flake path:/home/blckSwan/NixOS_FortKnox#Cyclops";
-      fetch = "fastfetch";
       gc = "git commit";
       gp = "git push origin main";
       gs = "git status";
-      sudo = "doas";
     };
     shellInit = ''
 

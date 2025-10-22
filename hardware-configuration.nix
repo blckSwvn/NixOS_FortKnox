@@ -21,7 +21,7 @@
   fileSystems."/nix/store" = {
     device = "/dev/disk/by-label/NIX";
     fsType = "ext4";
-    options = [ "noatime" ];
+    options = [ "noatime" "nodiratime" "data=writeback" ];
   };
 
   fileSystems."/" = {

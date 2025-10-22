@@ -2,8 +2,8 @@
 	"layer": "top",
 	"position": "bottom",
 	"reload_style_on_change": true,
-	"modules-left": ["clock", "pulseaudio", "mpris"],
-	"modules-center": ["hyprland/workspaces"],
+	"modules-left": ["clock", "pulseaudio"],
+	"modules-center": ["river/tags"],
 	"modules-right": ["bluetooth","network","battery"],
 
 
@@ -12,27 +12,11 @@
 		"format-muted": " Muted"
 	},
 
-	"mpris": {
-		"format": "{player-icon} {title} {artist}",
-		"format-paused": "{player_icon} {title} {artist}",
-		"player-icons": {
-			"default": "▶ "
-		},
-		"status-icon": {
-			"paused": "󰏤 "
-		}
-	},
-
-	"hyprland/workspaces": {
-		"format": "{icon}",
-		"format-icons": {
-			"active": "",
-			"default": "",
-			"empty": ""
-		},
-		"persistent-workspaces": {
-			"*": [ 1,2,3,4,5,6,7,8,9,10 ]
-		}
+	"river/tags": {
+		"num-tags": 10,
+		"tag-labels": ["", "", "", "", "", "", "", "", "", ""],
+		"disable-click": true,
+		"expand": false
 	},
 
 	"clock": {

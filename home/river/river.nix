@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     river
+      bibata-cursors
       wlr-randr
       rivercarro
       xdg-desktop-portal

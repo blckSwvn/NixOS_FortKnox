@@ -33,7 +33,8 @@ map("n", "<leader>k", "<C-W>k")
 map("n", "<leader>l", "<C-W>l")
 map("n", "<leader>v", ":vsplit<CR>")
 map("n", "<leader>c", ":split<CR>")
-map("n", "<leader>t", ":tabnew<CR>")
+map("n", "<leader>n", ":tabnew<CR>")
+map("n", "<leader>t", ":terminal<CR>")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 vim.cmd("command! Gs Git status")
@@ -108,7 +109,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 vim.diagnostic.config({ float = { border = border } })
 require("lspconfig.ui.windows").default_options.border = border
 
-local lspconfig = require("lspconfig")
+-- local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false
 
@@ -121,10 +122,7 @@ local on_attach = function(_, bufnr)
 	map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 end
 
-lspconfig.clangd.setup{ capabilities = capabilities, on_attach = on_attach }
-lspconfig.nixd.setup{ capabilities = capabilities, on_attach = on_attach }
-lspconfig.lua_ls.setup{ capabilities = capabilities, on_attach = on_attach }
-lspconfig.cssls.setup{ capabilities = capabilities, on_attach = on_attach }
+vim.lsp.enable('clangd', 'lua_ls', 'nixd', 'cssls')
 
 -- CMP CONFIG
 local cmp = require("cmp")

@@ -25,7 +25,7 @@
 
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = true;
+    powerOnBoot = false;
   };
 
 
@@ -41,7 +41,7 @@
       CPU_SCALING_GOVERN_ON_AC = "performance";
       CPU_SCALING_GOVERN_ON_BAT = "power";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
       TLP_DEFAULT_MODE = "BAT";
       TLP_PERSISTENT_DEFAULT = 1;
     };
