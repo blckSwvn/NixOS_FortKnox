@@ -31,8 +31,8 @@ riverctl send-layout-cmd rivercarro "main-location left"
 }
 riverctl focus-follows-cursor always
 
-riverctl border-color-focused 0xffffff
-riverctl border-color-unfocused 0x002244
+riverctl border-color-focused 0xb0b0ff
+riverctl border-color-unfocused 0x000000
 riverctl border-width 2
 
 riverctl rule-add '*' float=false

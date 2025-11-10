@@ -18,7 +18,6 @@
       # modrinth-app
       wineWowPackages.full
       obsidian
-      librewolf
 #etc
       torsocks
       brightnessctl
@@ -27,6 +26,7 @@
       man-pages-posix
 #DE
       xwayland
+      modrinth-app-unwrapped
       swaybg
       wofi
       playerctl
@@ -70,13 +70,7 @@
     enable = true;
   };
 
-  programs.obs-studio = {
-    enable = false; #disabled, runs heavy background processes
-      plugins = with pkgs.obs-studio-plugins; [
-      obs-pipewire-audio-capture
-      ];
-  };
-
+  #for dynamic linking
   programs.nix-ld.enable = true;
 
                                            }

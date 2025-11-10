@@ -118,7 +118,7 @@ local on_attach = function(_, bufnr)
 	map("n", "gd", vim.lsp.buf.definition, opts)
 	map("n", "K", vim.lsp.buf.hover, opts)
 	map("n", "gr", function() require("fzf-lua").lsp_references() end, opts)
-	map("n", "<leader>rn", vim.lsp.buf.rename, opts)
+	map("n", "y", vim.lsp.buf.rename, opts)
 	map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 end
 
@@ -143,76 +143,63 @@ cmp.setup({
 -- LUSH THEME
 local lush = require("lush")
 
-local palette = {
-	bg        = "#000005",
-	fg        = "#DADADA",
+local grays = {
+	fg    = "#DADADA",
+	bg    = "#000000",
+	black   = "#202020",
+	b_black = "#505050",
+}
 
-	-- Normal 8
-	black     = "#303030",
-	red       = "#DB1200",
-	green     = "#4EC24A",   -- tweaked to feel fresher & consistent
+local colors = {
+	green     = "#2db64A",   -- tweaked to feel fresher & consistent
 	yellow    = "#f0bf00",
 	blue      = "#4472CA",
-	magenta   = "#B85AF2",
 	cyan      = "#3FC8B3",
-	white     = "#E0E0E0",
-
-	-- Bright 8
-	bright_black   = "#5C5C5C",
-	bright_red     = "#FF4040",  -- softened from neon pink, still strong
-	bright_green   = "#78E06B",  -- true lighter green
-	bright_yellow  = "#FFD75A",  -- brighter golden yellow
-	bright_blue    = "#6CA8FF",  -- lighter, modern blue
-	bright_magenta = "#D49BFF",  -- softer purple-pink
-	bright_cyan    = "#7FE9DB",  -- more distinct from base cyan
-	bright_white   = "#FFFFFF",
 }
 
 local theme = lush(function()
 	return {
-		Normal      { fg = palette.fg, bg = palette.bg },
-		Cursor      { fg = palette.bg, bg = palette.fg },
-		Visual      { bg = palette.black },
-		Comment     { fg = palette.bright_black, gui = "italic" },
+		CursorLine  { bg = grays.black},
+		Visual      { bg = grays.black},
+		Normal      { fg = grays.fg, bg = grays.bg },
+		Cursor      { fg = grays.bg, bg = grays.fg },
+		Comment     { fg = grays.b_black, gui = "italic" },
 
 		-- Language
-		String      { fg = palette.green },
-		Number      { fg = palette.cyan },            -- cooler than yellow
-		Boolean     { fg = palette.magenta },         -- abstract concepts
-		Constant    { fg = palette.cyan },
-		Type        { fg = palette.green },
-		Keyword     { fg = palette.yellow },          -- control / definition
-		Conditional { fg = palette.yellow },          -- if/else, etc.
-		Statement   { fg = palette.red, gui = "bold" },
-		Function    { fg = palette.blue },
-		Identifier  { fg = palette.blue },
+		String      { fg = colors.green},
+		Boolean     { fg = colors.green},         -- true false
+		Constant    { fg = colors.green},
+		Number      { fg = colors.cyan},            -- cooler than yellow
+		Type        { fg = colors.cyan},
+		Keyword     { fg = colors.yellow},
+		PreProc     { fg = colors.yellow},   -- #includes, macros
+		Conditional { fg = colors.blue},          -- if/else, etc.
+		Function    { fg = colors.blue},
+		Identifier  { fg = grays.fg},
 
 		-- Operators and misc
-		Operator    { fg = palette.fg },              -- neutral, avoids rainbow
-		PreProc     { fg = palette.bright_yellow },   -- #includes, macros
-		Special     { fg = palette.bright_cyan },     -- escape chars, regex, unusual
+		Operator    { fg = grays.fg },              -- neutral, avoids rainbow
+		Special     { fg = grays.fg},     -- escape chars, regex, unusual
 
 		-- UI
-		Directory   { fg = palette.blue },
-		Error       { fg = palette.bright_red, gui = "bold" },
-		WarningMsg  { fg = palette.bright_yellow, gui = "bold" },
-		Info        { fg = palette.bright_blue },
-		Todo        { fg = palette.bright_yellow, gui = "bold,italic" },
+		Directory   { fg = colors.blue },
+		Error       { fg = colors.bright_red, gui = "bold" },
+		WarningMsg  { fg = colors.bright_yellow, gui = "bold" },
+		Info        { fg = grays.fg},
 
-		CursorLine  { bg = palette.black },
-		StatusLine  { fg = palette.fg, bg = palette.black },
-		StatusLineNC{ fg = palette.bright_black, bg = palette.black },
+		StatusLine  { fg = grays.fg, bg = colors.black },
+		StatusLineNC{ fg = grays.bright_black, bg = grays.black },
 
-		DiagnosticError { fg = palette.bright_red },
-		DiagnosticWarn  { fg = palette.bright_yellow },
-		DiagnosticInfo  { fg = palette.blue },
-		DiagnosticHint  { fg = palette.cyan },
+		DiagnosticError { fg = colors.yellow},
+		DiagnosticWarn  { fg = colors.yellow},
+		DiagnosticInfo  { fg = colors.blue },
+		DiagnosticHint  { fg = colors.cyan },
 	}
 end)
 
 lush(theme)
 
-vim.api.nvim_set_hl(0, "StatusLine",   { fg = palette.fg, bg = palette.bg, bold = true })
-vim.api.nvim_set_hl(0, "StatusLineNC", { fg = palette.fg, bg = palette.bg })
-vim.api.nvim_set_hl(0, "VertSplit",    { fg = palette.black, bg = palette.bg })
+vim.api.nvim_set_hl(0, "StatusLine",   { fg = colors.fg, bg = colors.bg, bold = true })
+vim.api.nvim_set_hl(0, "StatusLineNC", { fg = colors.fg, bg = colors.bg })
+vim.api.nvim_set_hl(0, "VertSplit",    { fg = colors.black, bg = colors.bg })
 
