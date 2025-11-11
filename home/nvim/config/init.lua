@@ -66,7 +66,7 @@ require("oil").setup({
 		"icon",
 	},
 	view_options = {
-		show_hidden = true,
+		show_hidden = false,
 		sort = {
 			{ "mtime", "desc" },
 			{ "name", "asc" },

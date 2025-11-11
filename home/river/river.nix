@@ -1,8 +1,13 @@
 { config, pkgs, ... } : {
 
-  home.file.".config/river" = {
-    source = ./config;
-    recursive = true;
+  home.file.".config/river/init.sh" = {
+    source = ./config/init.sh;
+    executable = true;
+  };
+
+  home.file.".config/river/wallpaper.sh" = {
+    source = ./config/wallpaper.sh;
+    executable = true;
   };
 
   home.packages = with pkgs; [

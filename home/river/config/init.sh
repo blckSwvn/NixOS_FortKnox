@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 pkill waybar
 
 export XDG_CURRENT_DESKTOP=river
@@ -52,6 +52,7 @@ riverctl rule-add -app-id librewolf tags 2
 #common lanching apps etc
 riverctl map normal $mod s spawn "systemctl suspend && hyprlock"
 riverctl map normal $mod+Shift s spawn "systemctl suspend"
+riverctl map normal $mod r spawn "$HOME/.config/river/wallpaper.sh"
 riverctl map normal $mod2 Space spawn kitty
 riverctl map normal $mod2 b spawn librewolf
 riverctl map normal $mod2 f toggle-fullscreen
