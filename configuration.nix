@@ -1,6 +1,8 @@
 { config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
+      ./modules/noveau.nix
+      # ./modules/nvidia.nix
       ./modules/boot.nix
       ./modules/hardware.nix
       ./modules/networking.nix

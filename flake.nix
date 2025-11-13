@@ -10,14 +10,17 @@
   outputs = { self, nixpkgs, unstable, neovim-nightly-overlay, home-manager, ... }:
     let
     system = "x86_64-linux";
+
+    unstablePkgs = import unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
+
   pkgs = import nixpkgs { 
     inherit system; 
     config.allowUnfree = true;
   };
-  unstablePkgs = import unstable { 
-    inherit system; 
-    config.allowUnfree = true;
-  };
+
   in {
     nixosConfigurations = {
       Cyclops = nixpkgs.lib.nixosSystem {

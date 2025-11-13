@@ -1,4 +1,4 @@
-{ config, pkgs, unstablePkgs, ... } : {
+{ config, pkgs, unstableKernel, ... } : {
   boot = {
 #bootloader
     loader = {
@@ -12,20 +12,17 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    initrd.kernelModules = [ "nvidia" ];
-    blacklistedKernelModules = [ "nouveau" ];
 
     supportedFilesystems = [
 # "ntfs"
 # "exfat"
     ];
 
-    kernelPackages = pkgs.linuxPackages_6_16;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelModules = [
       "kvm"
         "kvm_amd"
-        "nvidia"
 #"exfat" 
     ];
     kernelParams = [

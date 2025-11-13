@@ -48,8 +48,14 @@
       ]);
 
   fonts.packages = with pkgs; [
+    jetbrains-mono
     nerd-fonts.meslo-lg
-      jetbrains-mono
+
+#for less uniqueness
+      # liberation_ttf #times new roman, arial, courier new
+      # dejavu_fonts        # Very common Linux fonts
+      # noto-fonts          # Covers many scripts, common
+      corefonts           # Windows core fonts like Segoe UI
   ];
 
 #fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);

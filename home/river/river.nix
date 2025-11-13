@@ -1,7 +1,7 @@
 { config, pkgs, ... } : {
 
-  home.file.".config/river/init.sh" = {
-    source = ./config/init.sh;
+  home.file.".config/river/init" = {
+    source = ./config/init;
     executable = true;
   };
 

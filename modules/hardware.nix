@@ -47,19 +47,4 @@
     };
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.powerManagement.enable = true;
-
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable; #prod aka latest aka stable usally
-      nvidiaSettings = true;
-    open = false;
-    prime = {
-      sync.enable = true;
-      intelBusId = "PCI:230:0:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
                              }
