@@ -8,8 +8,8 @@
 
 
 	"pulseaudio": {
-		"format": "  {volume}%",
-		"format-muted": " Muted"
+		"format": " {volume}%",
+		"format-muted": "󰝟 Muted"
 	},
 
 	"river/tags": {
@@ -20,7 +20,7 @@
 	},
 
 	"clock": {
-		"format": " {:%H:%M} ",
+		"format": " {:%H:%M} ",
 		"interval": 1,   
 		"tooltip-format": "<tt>{calendar}</tt>",
 		"calendar": {
@@ -32,7 +32,7 @@
 	"network": {
 		"format-wifi": "   {essid}",
 		"format-ethernet":" {ifname}",
-		"format-disconnected": "",
+		"format-disconnected": " ",
 		"tooltip-format-disconnected": "Error",
 		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
 		"tooltip-format-ethernet": "{ifname} 🖧 "
