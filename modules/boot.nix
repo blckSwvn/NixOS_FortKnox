@@ -18,7 +18,7 @@
 # "exfat"
     ];
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages-libre;
 
     kernelModules = [
       "kvm"
