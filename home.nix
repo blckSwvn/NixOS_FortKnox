@@ -8,7 +8,6 @@
       ./home/waybar/waybar.nix
       ./home/starship/starship.nix
       ./home/river/river.nix
-      ./home/hyprland/hyprland.nix
   ];
 
   home.username = "blckSwan";

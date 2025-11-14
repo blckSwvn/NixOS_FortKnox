@@ -70,12 +70,13 @@
     EDITOR = "nvim";
   };
 
-  security.pam.services.hyprlock = {
+  security.pam.services.waylock = {
     text = ''
-      auth     include   login
-      account  include   login
-      '';
+    auth    include login
+    account include login
+    '';
   };
+
 
   system.stateVersion = "25.05";
                        }

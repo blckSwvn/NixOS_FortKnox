@@ -26,7 +26,7 @@
       man-pages-posix
 #DE
       xwayland
-      modrinth-app-unwrapped
+      waylock
       swaybg
       wofi
       playerctl
@@ -34,8 +34,6 @@
       grim
       slurp
 #langs/lsps
-      vscode-langservers-extracted
-      nix-init
       clang-tools
       gcc
 #VMs
