@@ -1,4 +1,4 @@
-{ config, pkgs, unstableKernel, ... } : {
+{ config, pkgs, unstablePkgs, ... } : {
   boot = {
 #bootloader
     loader = {
@@ -18,7 +18,7 @@
 # "exfat"
     ];
 
-    kernelPackages = pkgs.linuxPackages-libre;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelModules = [
       "kvm"
