@@ -20,4 +20,8 @@
       nvidiaBusId = "PCI:1:0:0";
     };
   };
+
+  programs.steam.package = pkgs.steam.override {
+    withPrimus = true;
+  };
                             }

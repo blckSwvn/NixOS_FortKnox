@@ -8,16 +8,15 @@
     syntaxHighlighting.enable = true;
     promptInit = ''
       eval "$(${pkgs.starship}/bin/starship init zsh)"
+      '';
 
-      if [[ -z "$ZSH_LOGGED_IN" && $- == *l* ]]; then
+    interactiveShellInit = ''
+      if [[ -z "$ZSH_LOGGED_IN" && -o login ]]; then
         export ZSH_LOGGED_IN=true
-          echo -e "\033[1;34m
-          ┌────────────────────────────────────────────┐
-          │ Welcome aboard captain, all systems online │
-          └────────────────────────────────────────────┘
-          \033[0m"
+          ${pkgs.fortune}/bin/fortune | ${pkgs.cowsay}/bin/cowsay
           fi
           '';
+
     shellAliases = {
       ".." = "cd ..";
       "~" = "cd ~";
@@ -25,9 +24,6 @@
       v = "nvim";
       vf = "nvimf";
       rebuild = "doas env GIT_ALLOW_ROOT=1 nixos-rebuild switch --flake path:/home/blckSwan/NixOS_FortKnox#Cyclops";
-      gc = "git commit";
-      gp = "git push origin main";
-      gs = "git status";
     };
     shellInit = ''
 

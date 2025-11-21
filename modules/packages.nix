@@ -19,6 +19,8 @@
       wineWowPackages.full
       obsidian
 #etc
+      cowsay
+      fortune
       torsocks
       brightnessctl
       tldr
@@ -72,7 +74,15 @@
 
   programs.steam = {
     enable = true;
+    remotePlay.openFirewall = false;
+    dedicatedServer.openFirewall = false;
+    localNetworkGameTransfers.openFirewall = true;
   };
+
+  programs.steam.gamescopeSession.enable = true;
+
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
 
   #for dynamic linking
   programs.nix-ld.enable = true;
