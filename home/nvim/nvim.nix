@@ -7,8 +7,5 @@
 
 #nvim installed directly through flake
   home.packages = with pkgs; [
-    lua-language-server
-      nixd
-      vscode-langservers-extracted
   ];
                         }

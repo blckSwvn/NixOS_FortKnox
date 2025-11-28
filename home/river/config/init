@@ -9,6 +9,8 @@ systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESS
 systemctl --user start xdg-desktop-portal-wlr.service &
 systemctl --user start xdg-desktop-portal.service &
 
+swaybg -i $HOME/pictures/wallpapers/wallpaper5.* &
+
 sleep 1
 waybar &
 

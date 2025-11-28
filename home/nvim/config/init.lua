@@ -37,10 +37,16 @@ map("n", "<leader>n", ":tabnew<CR>")
 map("n", "<leader>t", ":terminal<CR>")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
-vim.cmd("command! Gs Git status")
-vim.cmd("command! Gc Git commit")
-vim.cmd("command! Gp Git push origin main")
 map("t", "<C-Space>", [[<C-\><C-n>]])
+
+vim.api.nvim_create_autocmd("VimEnter",{
+callback = function ()
+	vim.cmd("r !fortune | cowsay ")
+	vim.bo.buftype = "nofile"
+	vim.bo.modifiable = false
+	vim.cmd("normal! ggzz")
+end
+})
 
 -- PACKS
 vim.pack.add({
@@ -51,6 +57,7 @@ vim.pack.add({
 	{src = "https://github.com/nvim-tree/nvim-web-devicons"},
 	{src = "https://github.com/hrsh7th/nvim-cmp"},
 	{src = "https://github.com/hrsh7th/cmp-nvim-lsp"},
+	{src = "https://github.com/L3MON4D3/LuaSnip"},
 	{src = "https://github.com/neovim/nvim-lspconfig"},
 	{src = "https://github.com/tpope/vim-fugitive"},
 	{src = "https://github.com/lewis6991/gitsigns.nvim"},
@@ -102,42 +109,68 @@ require("snipe").setup()
 map("n", "s", require("snipe").open_buffer_menu)
 
 -- LSP CONFIG
-local border = "rounded"
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 vim.diagnostic.config({ float = { border = border } })
-require("lspconfig.ui.windows").default_options.border = border
 
--- local lspconfig = require("lspconfig")
+-- Optional: load snippets from VSCode style
+require("luasnip.loaders.from_vscode").lazy_load()
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = false
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = { "documentation", "detail", "additionalTextEdits" }
+}
+
 
 local on_attach = function(_, bufnr)
-	local opts = { buffer = bufnr }
-	map("n", "gd", vim.lsp.buf.definition, opts)
-	map("n", "K", vim.lsp.buf.hover, opts)
-	map("n", "gr", function() require("fzf-lua").lsp_references() end, opts)
-	map("n", "y", vim.lsp.buf.rename, opts)
-	map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    local opts = { buffer = bufnr }
+    local map = vim.keymap.set
+    map("n", "gd", vim.lsp.buf.definition, opts)
+    map("n", "K", vim.lsp.buf.hover, opts)
+    map("n", "gr", function() require("fzf-lua").lsp_references() end, opts)
+    map("n", "y", vim.lsp.buf.rename, opts)
+    map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 end
 
-vim.lsp.enable('clangd', 'lua_ls', 'nixd', 'cssls')
+-- Server configs
+local servers = {
+    clangd = {},
+    lua_ls = { settings = { Lua = { diagnostics = { globals = { "vim" } } } } },
+    nixd = {},
+    cssls = {}
+}
+
+for name, config in pairs(servers) do
+    config.capabilities = capabilities
+    config.on_attach = on_attach
+    vim.lsp.config[name] = config
+end
 
 -- CMP CONFIG
 local cmp = require("cmp")
 cmp.setup({
-	window = {
-		completion = cmp.config.window.bordered(border),
-		documentation = cmp.config.window.bordered(border),
-	},
-	snippet = { expand = function() end },
-	mapping = {
-		['<Tab>'] = cmp.mapping.confirm({ select = true }, {"i","s"}),
-		['<Esc>'] = cmp.mapping.abort(),
-	},
-	sources = { {name="nvim_lsp"}, {name="buffer"}, {name="path"} },
-	completion = { completeopt='menu,menuone,select' }
+    snippet = {
+        expand = function(args)
+            require("luasnip").lsp_expand(args.body)  -- enable snippet expansion for LSP
+        end,
+    },
+    mapping = {
+        ["<Tab>"] = cmp.mapping.confirm({ select = true }, {"i", "s"}),  -- only confirm
+        ["<Esc>"] = cmp.mapping.abort(),                     -- abort
+    },
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "buffer" },
+        { name = "path" },
+        { name = "luasnip" },  -- keep snippets as a source
+    },
+    window = {
+	    completion = cmp.config.window.bordered("rounded"),
+	    documentation = cmp.config.window.bordered("rounded"),
+    },
+    completion = { completeopt = "menu,menuone,select" },
 })
 
 -- LUSH THEME
@@ -203,3 +236,11 @@ vim.api.nvim_set_hl(0, "StatusLine",   { fg = colors.fg, bg = colors.bg, bold = 
 vim.api.nvim_set_hl(0, "StatusLineNC", { fg = colors.fg, bg = colors.bg })
 vim.api.nvim_set_hl(0, "VertSplit",    { fg = colors.black, bg = colors.bg })
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+    callback = function()
+        -- Only start an LSP if one isn't already attached
+        if not next(vim.lsp.get_active_clients({ bufnr = 0 })) then
+            vim.cmd("LspStart")
+        end
+    end,
+})

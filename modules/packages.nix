@@ -17,7 +17,6 @@
 #progs
       # modrinth-app
       wineWowPackages.full
-      obsidian
 #etc
       cowsay
       fortune
@@ -37,13 +36,15 @@
       slurp
 #langs/lsps
       clang-tools
+      lua-language-server
+      nixd
+      vscode-langservers-extracted
       gcc
 #VMs
       qemu
       quickemu
       qemu_kvm
       spice-gtk
-      virtio-win
       ] ++ (with unstablePkgs; [
       ]);
 
@@ -76,7 +77,7 @@
     enable = true;
     remotePlay.openFirewall = false;
     dedicatedServer.openFirewall = false;
-    localNetworkGameTransfers.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = false;
   };
 
   programs.steam.gamescopeSession.enable = true;
