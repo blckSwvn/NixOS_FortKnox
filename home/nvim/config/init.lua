@@ -22,6 +22,7 @@ vim.g.mapleader = " "
 local map = vim.keymap.set
 map("n", "<leader>g", ":FzfLua grep<CR>")
 map("n", "<leader>f", ":FzfLua files<CR>")
+map("n", "<leader>m", ":FzfLua marks<CR>")
 map("n", "<leader>z", ":FzfLua <CR>")
 map("n", "<leader>-", ":Oil <CR>")
 map("n", "<leader>w", ":w<CR>")
@@ -44,6 +45,7 @@ callback = function ()
 	vim.cmd("r !fortune | cowsay ")
 	vim.bo.buftype = "nofile"
 	vim.bo.modifiable = false
+	vim.bo.readonly = true
 	vim.cmd("normal! ggzz")
 end
 })
@@ -64,6 +66,7 @@ vim.pack.add({
 	{src = "https://github.com/leath-dub/snipe.nvim"},
 	{src = "https://github.com/rktjmp/lush.nvim"},
 	{src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"},
+	{src = "https://github.com/chentoast/marks.nvim"},
 })
 
 -- PLUGIN CONFIGS
@@ -82,7 +85,9 @@ require("oil").setup({
 	watch_for_changes = true,
 })
 
-require'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "c", "lua", "nix", "css" },
+  highlight = { enable = true },
   textobjects = {
     select = {
       enable = true,
@@ -95,11 +100,6 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
-}
-
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {"c", "lua", "nix", "css"},
-	highlight = {enable = true},
 })
 
 require("nvim-autopairs").setup()
@@ -111,7 +111,7 @@ map("n", "s", require("snipe").open_buffer_menu)
 -- LSP CONFIG
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-vim.diagnostic.config({ float = { border = border } })
+vim.diagnostic.config({ float = { border = "rounded" } })
 
 -- Optional: load snippets from VSCode style
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -126,7 +126,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 
 local on_attach = function(_, bufnr)
     local opts = { buffer = bufnr }
-    local map = vim.keymap.set
     map("n", "gd", vim.lsp.buf.definition, opts)
     map("n", "K", vim.lsp.buf.hover, opts)
     map("n", "gr", function() require("fzf-lua").lsp_references() end, opts)
@@ -188,6 +187,7 @@ local colors = {
 	yellow    = "#f0bf00",
 	blue      = "#4472CA",
 	cyan      = "#3FC8B3",
+	red       = "#DA2C38",
 }
 
 local theme = lush(function()
@@ -216,12 +216,12 @@ local theme = lush(function()
 
 		-- UI
 		Directory   { fg = colors.blue },
-		Error       { fg = colors.bright_red, gui = "bold" },
-		WarningMsg  { fg = colors.bright_yellow, gui = "bold" },
+		Error       { fg = colors.red, gui = "bold" },
+		WarningMsg  { fg = colors.yellow, gui = "bold" },
 		Info        { fg = grays.fg},
 
 		StatusLine  { fg = grays.fg, bg = colors.black },
-		StatusLineNC{ fg = grays.bright_black, bg = grays.black },
+		StatusLineNC{ fg = grays.b_black, bg = grays.black },
 
 		DiagnosticError { fg = colors.yellow},
 		DiagnosticWarn  { fg = colors.yellow},
@@ -230,11 +230,17 @@ local theme = lush(function()
 	}
 end)
 
-lush(theme)
+require'marks'.setup {
+	default_mappings = true,
+	force_write_shada = true,
+	refresh_interval = 250,
+}
 
-vim.api.nvim_set_hl(0, "StatusLine",   { fg = colors.fg, bg = colors.bg, bold = true })
-vim.api.nvim_set_hl(0, "StatusLineNC", { fg = colors.fg, bg = colors.bg })
-vim.api.nvim_set_hl(0, "VertSplit",    { fg = colors.black, bg = colors.bg })
+lush(theme)
+vim.api.nvim_set_hl(0, "MarkSignHL", {fg = colors.red, bg = grays.bg})
+vim.api.nvim_set_hl(0, "StatusLine",   { fg = grays.fg, bg = grays.bg, bold = true })
+vim.api.nvim_set_hl(0, "StatusLineNC", { fg = grays.fg, bg = grays.bg })
+vim.api.nvim_set_hl(0, "VertSplit",    { fg = grays.black, bg = grays.bg })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function()

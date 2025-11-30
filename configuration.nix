@@ -64,6 +64,8 @@
     HandlePowerKey=suspend
     '';
 
+  programs.man.enable = true;
+
   environment.variables = {
     MANPAGER = "nvim +Man!";
     EDITOR = "nvim";
